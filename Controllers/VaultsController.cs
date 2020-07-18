@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using keepr.Models;
 using keepr.Services;
+using Keepr.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +14,11 @@ namespace keepr.Controllers
     public class VaultsController : ControllerBase
     {
         private readonly VaultsService _vs;
-        public VaultsController(VaultsService vs)
+        private readonly VaultKeepsService _vks;
+        public VaultsController(VaultsService vs, VaultKeepsService vks)
         {
             _vs = vs;
+            _vks = vks;
         }
 
         // TODO Fix this to return only boards assigned to a user
@@ -86,6 +89,21 @@ namespace keepr.Controllers
             try
             {
                 return Ok(_vs.Delete(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("{id}/keeps")]
+        [Authorize]
+        public ActionResult<VaultKeepViewModel> GetKeepsByVaultId(int id)
+        {
+            try
+            {
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_vks.GetKeepsByVaultId(id, userId));
             }
             catch (Exception e)
             {
