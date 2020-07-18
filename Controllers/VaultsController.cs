@@ -1,31 +1,32 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
-using Keepr.Models;
-using Keepr.Services;
+using keepr.Models;
+using keepr.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
-namespace Keepr.Controllers
+namespace keepr.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class KeepsController : ControllerBase
+    public class VaultsController : ControllerBase
     {
-        private readonly KeepsService _ks;
-        public KeepsController(KeepsService ks)
+        private readonly VaultsService _vs;
+        public VaultsController(VaultsService vs)
         {
-            _ks = ks;
+            _vs = vs;
         }
+
+        // TODO Fix this to return only boards assigned to a user
         [HttpGet]
-        public ActionResult<IEnumerable<Keep>> Get()
+        [Authorize]
+        public ActionResult<IEnumerable<Vault>> Get()
         {
             try
             {
-                return Ok(_ks.Get());
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_vs.Get(userId));
             } 
             catch (Exception e)
             {
@@ -35,13 +36,13 @@ namespace Keepr.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult<Keep> Post([FromBody] Keep newKeep)
+        public ActionResult<Vault> Post([FromBody] Vault newVault)
         {
             try
             {
                 var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                newKeep.UserId = userId;
-                return Ok(_ks.Create(newKeep));
+                newVault.UserId = userId;
+                return Ok(_vs.Create(newVault));
             }
             catch (Exception e)
             {
@@ -50,11 +51,11 @@ namespace Keepr.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Keep> GetById(int id)
+        public ActionResult<Vault> GetById(int id)
         {
             try
             {
-                return Ok(_ks.Get(id));
+                return Ok(_vs.Get(id));
             }
             catch (Exception e)
             {
@@ -63,13 +64,13 @@ namespace Keepr.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Keep> Edit(int id, [FromBody] Keep keepToUpdate)
+        public ActionResult<Vault> Edit(int id, [FromBody] Vault VaultToUpdate)
         {
             try
             {
-                keepToUpdate.Id = id;
+                VaultToUpdate.Id = id;
                 string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                return Ok(_ks.Edit(keepToUpdate, userId));
+                return Ok(_vs.Edit(VaultToUpdate, userId));
             }
             catch (Exception e)
             {
@@ -80,18 +81,16 @@ namespace Keepr.Controllers
 
         [HttpDelete("{id}")]
         [Authorize]
-        public ActionResult<Keep> Delete(int id)
+        public ActionResult<Vault> Delete(int id)
         {
             try
             {
-                return Ok(_ks.Delete(id));
+                return Ok(_vs.Delete(id));
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
-
-
     }
 }
