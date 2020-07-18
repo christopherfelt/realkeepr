@@ -54,6 +54,7 @@ namespace keepr.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public ActionResult<Vault> GetById(int id)
         {
             try
@@ -67,6 +68,7 @@ namespace keepr.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public ActionResult<Vault> Edit(int id, [FromBody] Vault VaultToUpdate)
         {
             try
