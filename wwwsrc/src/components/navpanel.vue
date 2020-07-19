@@ -2,7 +2,7 @@
   <nav id="sidebar" class="bg-panel">
     <div class="sidebar-header m-3 d-flex justify-content-center">
       <!-- <h1 class="anurati heading-1-color">MUSIC</h1> -->
-      <h1 class="anurati heading-1-color">
+      <h1 class="anurati heading-1-color" @click="routeToHome">
         MUS<span class="heading-4-color mr-2">A</span
         ><span class="mr-2">I</span>C
       </h1>
@@ -10,7 +10,7 @@
         MUSIC MOS <span class="a-in-title">A</span>IC
       </h3> -->
     </div>
-    <Playback />
+    <!-- <Playback /> -->
     <div
       class="d-flex justify-content-center p-1 mt-3 animate__animated animate__fadeInUp"
       :class="{ animate__fadeOutUp: fadeStatus }"
@@ -52,7 +52,6 @@
             role="tab"
             aria-controls="pills-contact"
             aria-selected="false"
-            @click="routeToDashboard"
           >
             <small v-if="$auth.isAuthenticated">Dashboard</small>
             <small v-else> Login </small>
@@ -63,7 +62,7 @@
     <div class="d-flex justify-content-center">
       <div class="tab-content" id="pills-tabContent">
         <div
-          class="tab-pane animate__animated animate__fadeInUp"
+          class="tab-pane"
           id="pills-home"
           role="tabpanel"
           aria-labelledby="pills-home-tab"
@@ -87,7 +86,12 @@
           aria-labelledby="pills-contact-tab"
         >
           <!-- <About /> -->
-          <!-- <router-link :to="{ name: 'dashboard' }"> Dashboard </router-link> -->
+          <router-link v-if="$auth.isAuthenticated" :to="{ name: 'dashboard' }"
+            >Go To Dashboard
+          </router-link>
+          <button class="btn btn-success" @click="login" v-else>
+            Login
+          </button>
         </div>
       </div>
     </div>
@@ -108,6 +112,15 @@ export default {
   methods: {
     routeToDashboard() {
       this.$router.push({ name: "dashboard" });
+    },
+    routeToHome() {
+      this.$router.push({ name: "home" });
+    },
+    async login() {
+      await this.$auth.loginWithPopup();
+      this.$store.dispatch("setBearer", this.$auth.bearer);
+      console.log("this.$auth.user: ");
+      console.log(this.$auth.user);
     },
   },
   components: {

@@ -8,6 +8,8 @@
       <navpanel />
       <router-view />
     </div>
+    <AddKeepModal />
+    <AddVaultModal />
   </div>
 </template>
 
@@ -15,6 +17,8 @@
 import Navbar from "@/components/navbar";
 import Navpanel from "@/components/navpanel";
 import { onAuth } from "@bcwdev/auth0-vue";
+import AddKeepModal from "@/components/addKeepModal";
+import AddVaultModal from "@/components/addVaultModal";
 export default {
   name: "App",
   async beforeCreate() {
@@ -24,6 +28,8 @@ export default {
   components: {
     Navbar,
     Navpanel,
+    AddKeepModal,
+    AddVaultModal,
   },
 };
 </script>

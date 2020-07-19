@@ -6,8 +6,8 @@ let baseUrl = location.host.includes("localhost")
 
 export const api = Axios.create({
   baseURL: baseUrl + "api/",
-  timeout: 3000,
-  withCredentials: true
+  timeout: 5000,
+  withCredentials: true,
 });
 
 export const setBearer = function(bearer) {

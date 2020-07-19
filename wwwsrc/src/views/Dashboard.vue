@@ -1,13 +1,28 @@
 <template>
-  <div class="dashboard-container m-3 p-3">
-    <h1 class="ailerons text-center">DASHBOARD</h1>
-    <div class="row d-flex justify-content-between">
-      <div class="col m-3 test-card"></div>
-      <div class="col m-3 test-card"></div>
-      <div class="col m-3 test-card"></div>
-      <div class="col m-3 test-card"></div>
-      <div class="col m-3 test-card"></div>
-      <div class="col m-3 test-card"></div>
+  <div
+    class="dashboard-container m-3 p-3 animate__animated animate__fast animate__fadeIn"
+  >
+    <h1 class="ailerons text-center ">
+      DASHBOARD
+    </h1>
+    <button class="btn btn-danger" @click="logout">logout</button>
+    <!-- <button class="btn btn-success" @click="addKeep">Add Keep</button> -->
+    <button class="btn btn-success" @click="addVault">Add Vault</button>
+    <div
+      v-for="vault in vaults"
+      :key="vault.id"
+      class="card d-inline-block card-dems"
+    >
+      <img class="card-img-top" src="" alt="" />
+      <div class="card-body">
+        <router-link
+          :to="{ name: 'vaultDetail', params: { vaultId: vault.id } }"
+        >
+          <h4 class="card-title">{{ vault.name }}</h4>
+        </router-link>
+        <h6>Description</h6>
+        <p class="card-text">{{ vault.description }}</p>
+      </div>
     </div>
 
     <!-- public {{ publicKeeps }} user {{ userKeeps }} -->
@@ -18,9 +33,28 @@
 </template>
 
 <script>
+import "animate.css";
 export default {
-  mounted() {},
-  computed: {},
+  mounted() {
+    this.$store.dispatch("getAllUserVaults");
+  },
+  computed: {
+    vaults() {
+      return this.$store.state.VaultStore.activeVaults;
+    },
+  },
+  methods: {
+    async logout() {
+      this.$store.dispatch("resetBearer");
+      await this.$auth.logout({ returnTo: window.location.origin });
+    },
+    addKeep() {
+      $("#addKeepModal").modal("show");
+    },
+    addVault() {
+      $("#addVaultModal").modal("show");
+    },
+  },
 };
 </script>
 

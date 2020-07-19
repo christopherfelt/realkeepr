@@ -2,6 +2,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import Axios from "axios";
 import router from "../router";
+import { KeepStore } from "./KeepStore";
+import { VaultStore } from "./VaultStore";
 
 Vue.use(Vuex);
 
@@ -30,5 +32,7 @@ export default new Vuex.Store({
   },
   modules: {
     // playback
+    KeepStore,
+    VaultStore,
   },
 });
