@@ -1,12 +1,19 @@
 <template>
   <div id="app">
-    <navbar />
-    <router-view />
+    <div class="d-none">
+      <navbar />
+      <router-view />
+    </div>
+    <div>
+      <navpanel />
+      <router-view />
+    </div>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/navbar";
+import Navpanel from "@/components/navpanel";
 import { onAuth } from "@bcwdev/auth0-vue";
 export default {
   name: "App",
@@ -15,8 +22,9 @@ export default {
     this.$store.dispatch("setBearer", this.$auth.bearer);
   },
   components: {
-    Navbar
-  }
+    Navbar,
+    Navpanel,
+  },
 };
 </script>
 
@@ -24,4 +32,9 @@ export default {
 @import "./assets/_variables.scss";
 @import "bootstrap";
 @import "./assets/_overrides.scss";
+
+.wrapper {
+  display: flex;
+  width: 100%;
+}
 </style>

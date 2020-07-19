@@ -13,13 +13,13 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
     },
     {
       path: "/dashboard",
       name: "dashboard",
       component: Dashboard,
-      beforeEnter: authGuard
-    }
-  ]
+      beforeEnter: authGuard,
+    },
+  ],
 });
