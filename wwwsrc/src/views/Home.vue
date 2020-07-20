@@ -5,30 +5,12 @@
     <h1 class="ailerons text-center ">
       HOME
     </h1>
-    <div
-      v-for="keep in keeps"
-      :key="keep.id"
-      class="card d-inline-block card-dems"
-    >
-      <img class="card-img-top" src="" alt="" />
-      <div class="card-body">
-        <h4 class="card-title">{{ keep.name }}</h4>
-        <h6>Description</h6>
-        <p class="card-text">{{ keep.description }}</p>
-        <h6>Private</h6>
-        <p class="card-text">{{ keep.isPrivate }}</p>
-        <h6>Views</h6>
-        <p class="card-text">{{ keep.views }}</p>
-        <h6>Keeps</h6>
-        <p class="card-text">{{ keep.keeps }}</p>
-      </div>
-    </div>
-
-    {{ keeps }}
+    <KeepCard v-for="keep in keeps" :key="keep.id" :keep="keep" />
   </div>
 </template>
 
 <script>
+import KeepCard from "@/components/keepCard.vue";
 export default {
   name: "home",
   mounted() {
@@ -46,6 +28,9 @@ export default {
     logout() {
       this.$store.dispatch("logout");
     },
+  },
+  components: {
+    KeepCard,
   },
 };
 </script>

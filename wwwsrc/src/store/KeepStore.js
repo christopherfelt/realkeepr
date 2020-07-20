@@ -3,10 +3,14 @@ import { api } from "./AxiosService";
 export const KeepStore = {
   state: {
     activeKeeps: [],
+    activeKeepDetail: {},
   },
   mutations: {
     setActiveKeeps(state, keeps) {
       state.activeKeeps = keeps;
+    },
+    setActiveKeepDetail(state, keep) {
+      state.activeKeepDetail = keep;
     },
   },
   actions: {
@@ -19,7 +23,22 @@ export const KeepStore = {
     async getAllPublicKeeps({ commit, dispatch }) {
       try {
         let res = await api.get("keeps");
+
         commit("setActiveKeeps", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getKeepById({ commit, state }, keepId) {
+      try {
+        let activeKeep = state.activeKeeps.find((k) => k.id == keepId);
+        console.log(activeKeep);
+        if (activeKeep == undefined) {
+          activeKeep = await api.get("keeps/" + keepId);
+          activeKeep = activeKeep.data;
+        }
+        console.log("hello from keep id dispath");
+        commit("setActiveKeepDetail", activeKeep);
       } catch (error) {
         console.error(error);
       }
@@ -29,8 +48,7 @@ export const KeepStore = {
         let keepRes = await api.post("keeps", newKeep);
         newKeep.keepId = keepRes.data.id;
         let dtoRes = await api.post("vaultkeeps", newKeep);
-        console.log(keepRes.data, dtoRes.data);
-        // dispatch("")
+        dispatch("getKeepsByVaultId", newKeep.vaultId);
       } catch (error) {
         console.error(error);
       }

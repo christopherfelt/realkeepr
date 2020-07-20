@@ -6,6 +6,8 @@ import Home from "./views/Home.vue";
 import Dashboard from "./views/Dashboard.vue";
 // @ts-ignore
 import VaultDetail from "./views/VaultDetail.vue";
+// @ts-ignore
+import KeepDetail from "./views/KeepDetail.vue";
 import { authGuard } from "@bcwdev/auth0-vue";
 
 Vue.use(Router);
@@ -28,6 +30,11 @@ export default new Router({
       name: "vaultDetail",
       component: VaultDetail,
       beforeEnter: authGuard,
+    },
+    {
+      path: "/keep/:keepId",
+      name: "keepDetail",
+      component: KeepDetail,
     },
   ],
 });

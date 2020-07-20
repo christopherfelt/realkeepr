@@ -8,14 +8,17 @@
     <button class="btn btn-success" @click="openAddKeepModal">
       Add Keep
     </button>
+    <KeepCard v-for="keep in activeKeeps" :key="keep.id" :keep="keep" />
   </div>
 </template>
 
 <script>
+import KeepCard from "@/components/keepCard.vue";
 export default {
   name: "vaultDetail",
   mounted() {
     this.$store.dispatch("setActiveVaultDetail", this.$route.params.vaultId);
+    this.$store.dispatch("getKeepsByVaultId", this.$route.params.vaultId);
   },
   data() {
     return {};
@@ -23,6 +26,9 @@ export default {
   computed: {
     activeVault() {
       return this.$store.state.VaultStore.activeVaultDetail;
+    },
+    activeKeeps() {
+      return this.$store.state.KeepStore.activeKeeps;
     },
   },
   methods: {
@@ -42,7 +48,9 @@ export default {
       $("#addKeepModal").modal("toggle");
     },
   },
-  components: {},
+  components: {
+    KeepCard,
+  },
 };
 </script>
 

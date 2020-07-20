@@ -49,7 +49,7 @@ namespace Keepr
                 {
                     builder
                         .WithOrigins(new string[]{
-                            "http://localhost:8080"
+                            "http://localhost:8080",
                         })
                         .AllowAnyMethod()
                         .AllowAnyHeader()

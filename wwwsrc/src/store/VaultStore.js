@@ -36,13 +36,20 @@ export const VaultStore = {
       }
       commit("setActiveVaultDetail", activeVault);
     },
-    //   async getKeepsByVaultId({ commit, dispatch }, vaultId) {
-    //     try {
-    //         let res = await api.get(`vault/${vaultId}/keeps`);
-    //         commit("setActive")
-    //     } catch (error) {
+    async getKeepsByVaultId({ commit, dispatch }, vaultId) {
+      try {
+        let res = await api.get(`vaults/${vaultId}/keeps`);
+        commit("setActiveKeeps", res.data, { root: true });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    // async addKeepToVault({ commit, dispatch }, dtoData) {
+    //   try {
+    //     let res = await api.get()
+    //   } catch (error) {
 
-    //     }
+    //   }
     // }
   },
 };

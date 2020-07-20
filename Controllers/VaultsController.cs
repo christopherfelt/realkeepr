@@ -21,7 +21,6 @@ namespace keepr.Controllers
             _vks = vks;
         }
 
-        // TODO Fix this to return only boards assigned to a user
         [HttpGet]
         [Authorize]
         public ActionResult<IEnumerable<Vault>> Get()
@@ -30,6 +29,7 @@ namespace keepr.Controllers
             {
                 string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 return Ok(_vs.Get(userId));
+                // return Ok("made it to controller");
             } 
             catch (Exception e)
             {

@@ -18,17 +18,17 @@ namespace Keepr.Services
             return _repo.Get();
         }
 
-        // private Keep Get(int id)
-        // {
-        //     Keep exists = _repo.GetById(id);
-        //     if(exists == null)
-        //     {
-        //         throw new Exception("Invalid Keep Id");
-        //     }
-        //     return exists;
-        // }
+        private Keep Get(int id)
+        {
+            Keep exists = _repo.GetById(id);
+            if(exists == null)
+            {
+                throw new Exception("Invalid Keep Id");
+            }
+            return exists;
+        }
 
-        internal Keep Get(int id)
+        internal Keep Get(int id, string userId)
         {
             Keep exists = _repo.GetById(id);
             if(exists == null){
@@ -36,7 +36,10 @@ namespace Keepr.Services
             }
             if(exists.IsPrivate)
             {
-                throw new Exception("Not allowed to get private keep that you do not own");
+                if(exists.UserId != userId)
+                {
+                    throw new Exception("Not allowed to get private keep that you do not own");
+                }
             }
             return exists;
         }

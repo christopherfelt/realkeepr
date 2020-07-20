@@ -19,6 +19,7 @@ import Navpanel from "@/components/navpanel";
 import { onAuth } from "@bcwdev/auth0-vue";
 import AddKeepModal from "@/components/addKeepModal";
 import AddVaultModal from "@/components/addVaultModal";
+import AddKeepToVaultModal from "@/components/addKeepToVaultModal";
 export default {
   name: "App",
   async beforeCreate() {
@@ -30,6 +31,7 @@ export default {
     Navpanel,
     AddKeepModal,
     AddVaultModal,
+    AddKeepToVaultModal,
   },
 };
 </script>
