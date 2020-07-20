@@ -28,8 +28,12 @@ export const VaultStore = {
         console.error(error);
       }
     },
-    setActiveVaultDetail({ commit, state }, vaultId) {
+    async setActiveVaultDetail({ commit, state }, vaultId) {
       let activeVault = state.activeVaults.find((v) => v.id == vaultId);
+      if (activeVault == undefined) {
+        activeVault = await api.get(`vaults/${vaultId}`);
+        activeVault = activeVault.data;
+      }
       commit("setActiveVaultDetail", activeVault);
     },
     //   async getKeepsByVaultId({ commit, dispatch }, vaultId) {

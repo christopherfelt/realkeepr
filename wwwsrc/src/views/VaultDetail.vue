@@ -1,13 +1,11 @@
 <template>
-  <div class="vault-detail-container text-center">
+  <div
+    class="vault-detail-container m-3 p-3 text-center animate__animated animate__fast animate__fadeIn"
+  >
     <h1 class="ailerons text-center ">{{ activeVault.name }}</h1>
     <p class="text-center">{{ activeVault.description }}</p>
     <!-- {{ activeVault }} -->
-    <button
-      class="btn btn-success"
-      data-toggle="modal"
-      data-target="#addKeepModal"
-    >
+    <button class="btn btn-success" @click="openAddKeepModal">
       Add Keep
     </button>
   </div>
@@ -27,7 +25,23 @@ export default {
       return this.$store.state.VaultStore.activeVaultDetail;
     },
   },
-  methods: {},
+  methods: {
+    openAddKeepModal() {
+      $("#addKeepModal").attr("data-vault", this.$route.params.vaultId);
+      let options = $("#addKeepModal")
+        .find("#vault-select")
+        .children();
+      console.log(options);
+      for (let i = 0; i < options.length; i++) {
+        let option = options[i];
+        if (option.value == this.$route.params.vaultId) {
+          option.selected = true;
+          break;
+        }
+      }
+      $("#addKeepModal").modal("toggle");
+    },
+  },
   components: {},
 };
 </script>
