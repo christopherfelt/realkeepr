@@ -2,9 +2,19 @@
   <div class="card d-inline-block card-dems">
     <img class="card-img-top" src="" alt="" />
     <div class="card-body">
-      <router-link :to="{ name: 'keepDetail', params: { keepId: keep.id } }">
+      <router-link
+        v-if="$auth.isAuthenticated"
+        :to="{ name: 'keepDetail', params: { keepId: keep.id } }"
+      >
         <h4 class="card-title">{{ keep.name }}</h4>
       </router-link>
+      <router-link
+        v-else
+        :to="{ name: 'keepDetailPublic', params: { keepId: keep.id } }"
+      >
+        <h4 class="card-title">{{ keep.name }}</h4>
+      </router-link>
+
       <h6>Description</h6>
       <p class="card-text">{{ keep.description }}</p>
       <h6>Private</h6>

@@ -2,7 +2,7 @@
   <div class="addKeepToVaultModal">
     <div
       class="modal fade"
-      id="addKeepModal"
+      id="addKeepToVaultModal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="addKeepModal"
@@ -11,7 +11,9 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="addKeepToVaultLabel">Add Keep</h5>
+            <h5 class="modal-title" id="addKeepToVaultLabel">
+              Add to another vault
+            </h5>
             <button
               type="button"
               class="close"
@@ -32,6 +34,7 @@
                     id="vault-select"
                     @click="getVaultIdFromOption($event)"
                   >
+                    <option value="no choice">Choose Vault</option>
                     <option
                       v-for="vault in activeVaults"
                       :key="vault.id"
@@ -58,7 +61,7 @@
             <button
               type="button"
               class="btn btn-primary"
-              @click="createNewKeep"
+              @click="addKeepToAnotherVault"
             >
               Submit
             </button>
@@ -72,15 +75,33 @@
 <script>
 export default {
   name: "addKeepToVaultModal",
+  mounted() {},
   data() {
-    return {};
+    return {
+      vaultSelection: "",
+    };
   },
   computed: {
     activeVaults() {
       return this.$store.state.VaultStore.activeVaults;
     },
   },
-  methods: {},
+  methods: {
+    getVaultIdFromOption() {
+      this.vaultSelection = event.currentTarget.value;
+    },
+    addKeepToAnotherVault() {
+      let keepId = $("#addKeepToVaultModal").data("keepid");
+      let dto = {
+        vaultId: parseInt(this.vaultSelection),
+        keepId: parseInt(keepId),
+      };
+      if (dto.vaultId != "no choice") {
+        this.$store.dispatch("addKeepToVault", dto);
+      }
+      $("#addKeepToVaultModal").modal("toggle");
+    },
+  },
   components: {},
 };
 </script>

@@ -78,7 +78,7 @@ namespace Keepr.Repositories
             return affectedRows == 1;
         }
 
-        internal bool Edit(Keep keepToUpdate, string userId)
+        internal bool Edit(Keep keepToUpdate)
         {
             string sql = @"
                 UPDATE keeps
@@ -94,6 +94,8 @@ namespace Keepr.Repositories
                 AND userId = @UserId";
             int affectedRows = _db.Execute(sql, keepToUpdate);
             return affectedRows == 1;
+            // string sql2 = "SELECT * FROM keeps where id = @Id";
+            // return _db.QueryFirstOrDefault<Keep>(sql2, keepToUpdate);
         }
 
         internal void Delete(int id)

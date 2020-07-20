@@ -9,7 +9,9 @@
       <router-view />
     </div>
     <AddKeepModal />
+    <EditKeepModal />
     <AddVaultModal />
+    <AddKeepToVaultModal />
   </div>
 </template>
 
@@ -18,8 +20,10 @@ import Navbar from "@/components/navbar";
 import Navpanel from "@/components/navpanel";
 import { onAuth } from "@bcwdev/auth0-vue";
 import AddKeepModal from "@/components/addKeepModal";
+import EditKeepModal from "@/components/editKeepModal";
 import AddVaultModal from "@/components/addVaultModal";
 import AddKeepToVaultModal from "@/components/addKeepToVaultModal";
+
 export default {
   name: "App",
   async beforeCreate() {
@@ -32,6 +36,7 @@ export default {
     AddKeepModal,
     AddVaultModal,
     AddKeepToVaultModal,
+    EditKeepModal,
   },
 };
 </script>

@@ -32,12 +32,11 @@ export const KeepStore = {
     async getKeepById({ commit, state }, keepId) {
       try {
         let activeKeep = state.activeKeeps.find((k) => k.id == keepId);
-        console.log(activeKeep);
         if (activeKeep == undefined) {
           activeKeep = await api.get("keeps/" + keepId);
           activeKeep = activeKeep.data;
         }
-        console.log("hello from keep id dispath");
+
         commit("setActiveKeepDetail", activeKeep);
       } catch (error) {
         console.error(error);
@@ -49,6 +48,34 @@ export const KeepStore = {
         newKeep.keepId = keepRes.data.id;
         let dtoRes = await api.post("vaultkeeps", newKeep);
         dispatch("getKeepsByVaultId", newKeep.vaultId);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editKeep({ commit, state }, editKeep) {
+      try {
+        let res = await api.put("keeps/" + editKeep.id, editKeep);
+        state.name = editKeep.name;
+        state.description = editKeep.description;
+        state.img = editKeep.img;
+        state.isPrivate = editKeep.isPrivate;
+        commit("setActiveKeepDetail", state);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async addKeepToVault({ commit }, dto) {
+      try {
+        let res = await api.post("vaultkeeps/", dto);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async removeKeepFromVault({ commit }, dto) {
+      try {
+        let res = await api.delete(
+          "vaultkeeps/" + dto.keepId + "/" + dto.vaultId
+        );
       } catch (error) {
         console.error(error);
       }

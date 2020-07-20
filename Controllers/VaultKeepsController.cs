@@ -49,5 +49,17 @@ namespace keepr.Controllers
             }
         }
         
+        [HttpDelete("{keepid}/{vaultid}")]
+        public ActionResult<DTOVaultKeep> Delete(int keepid, int vaultid)
+        {
+            try
+            {
+                return Ok(_vks.Delete(keepid, vaultid));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

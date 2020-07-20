@@ -52,5 +52,11 @@ namespace keepr.Repositories
             WHERE (vaultId = @vaultId AND vk.userId = @userId)";
             return _db.Query<VaultKeepViewModel>(sql, new { vaultId, userId });
         }
+
+        internal DTOVaultKeep GetById(int keepid, int vaultid)
+        {
+            string sql = "SELECT * FROM vaultkeeps WHERE keepId = @keepid AND vaultId = @vaultId";
+            return _db.QueryFirstOrDefault<DTOVaultKeep>(sql, new { keepid, vaultid });
+        }
     }
 }

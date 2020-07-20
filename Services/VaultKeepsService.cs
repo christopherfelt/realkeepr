@@ -44,5 +44,22 @@ namespace keepr.Services
             // TODO might need to put a user check access check on this hence the vault 
             return _repo.GetKeepsByVaultId(vaultId, userId);
         }
+
+        internal DTOVaultKeep Delete(int keepid, int vaultid)
+        {
+            DTOVaultKeep exists = Get(keepid, vaultid);
+            _repo.Delete(exists.Id);
+            return exists;
+        }
+
+        private DTOVaultKeep Get(int keepid, int vaultid)
+        {
+            DTOVaultKeep exists = _repo.GetById(keepid, vaultid);
+            if(exists == null)
+            {
+                throw new Exception("Invalid Vault Id");
+            }
+            return exists;
+        }
     }
 }

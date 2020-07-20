@@ -89,9 +89,13 @@ namespace Keepr.Services
                 throw new Exception("Could not increase views for given keep");
             }
 
-            if(foundKeep.UserId == userId && _repo.Edit(keepToUpdate, userId))
+            if(foundKeep.UserId == userId)
             {
-                return keepToUpdate;
+                keepToUpdate.UserId = userId;
+                if(_repo.Edit(keepToUpdate)){
+                    return keepToUpdate;
+                }
+                // return _repo.Edit(keepToUpdate, userId);
             }
             throw new Exception("You can not edit the given keep");
 
