@@ -4,6 +4,7 @@ export const KeepStore = {
   state: {
     activeKeeps: [],
     activeKeepDetail: {},
+    activeUserKeeps: [],
   },
   mutations: {
     setActiveKeeps(state, keeps) {
@@ -11,6 +12,9 @@ export const KeepStore = {
     },
     setActiveKeepDetail(state, keep) {
       state.activeKeepDetail = keep;
+    },
+    setActiveUserKeeps(state, keeps) {
+      state.activeUserKeeps = keeps;
     },
   },
   actions: {
@@ -25,6 +29,14 @@ export const KeepStore = {
         let res = await api.get("keeps");
 
         commit("setActiveKeeps", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getAllUserKeeps({ commit, dispatch }) {
+      try {
+        let res = await api.get("keeps/user");
+        commit("setActiveUserKeeps", res.data);
       } catch (error) {
         console.error(error);
       }

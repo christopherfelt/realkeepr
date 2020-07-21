@@ -18,22 +18,17 @@ import NavpanelVaultListItem from "@/components/navpanelVaultListItem";
 import { onAuth } from "@bcwdev/auth0-vue";
 export default {
   name: "navpanelVaultList",
-  async mounted() {
-    await onAuth();
-    this.$store.dispatch("setBearer", this.$auth.bearer);
-    this.$store.dispatch("getAllUserVaults");
-  },
+  //   async mounted() {
+  //     await onAuth();
+  //     this.$store.dispatch("setBearer", this.$auth.bearer);
+  //     this.$store.dispatch("getAllUserVaults");
+  //   },
   data() {
     return {};
   },
   computed: {
     vaults() {
-      let state = this.$store.state.VaultStore.activeVaults;
-      state.forEach((element) => {
-        element.show = false;
-      });
-      return state;
-      //   return this.$store.state.VaultStore.activeVaults;
+      return this.$store.state.VaultStore.activeVaults;
     },
     authToken() {
       return this.$store.state.VaultStore.authToken;

@@ -1,10 +1,11 @@
 import { api, setBearer, resetBearer } from "./AxiosService";
+import router from "../router";
 
 export const VaultStore = {
   state: {
     activeVaults: [],
     activeVaultDetail: {},
-    authToken: {},
+    // authToken: {},
   },
   mutations: {
     setActiveVaults(state, vaults) {
@@ -13,15 +14,14 @@ export const VaultStore = {
     setActiveVaultDetail(state, activeVault) {
       state.activeVaultDetail = activeVault;
     },
-    setAuthToken(state, authToken) {
-      console.log("auth token", authToken);
-      state.authToken = authToken;
-    },
+    // setAuthToken(state, authToken) {
+    //   state.authToken = authToken;
+    // },
   },
   actions: {
     setBearer({ commit }, bearer) {
       api.defaults.headers.authorization = bearer;
-      commit("setAuthToken", bearer);
+      // commit("setAuthToken", bearer);
     },
     resetBearer() {
       api.defaults.headers.authorization = "";
@@ -50,12 +50,21 @@ export const VaultStore = {
         console.error(error);
       }
     },
-    // async addKeepToVault({ commit, dispatch }, dtoData) {
-    //   try {
-    //     let res = await api.get()
-    //   } catch (error) {
-
-    //   }
-    // }
+    async addNewVault({ commit, dispatch }, newVault) {
+      try {
+        let res = await api.post("vaults", newVault);
+        dispatch("getAllUserVaults");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteVault({ commit, dispatch }, vaultId) {
+      try {
+        let res = await api.delete("vaults/" + vaultId);
+        router.push({ name: "dashboard" });
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 };

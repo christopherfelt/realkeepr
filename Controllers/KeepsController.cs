@@ -32,6 +32,8 @@ namespace Keepr.Controllers
                 return BadRequest(e.Message);
             };
         }
+
+        // get user keeps
         
 
         [HttpPost]
@@ -57,12 +59,11 @@ namespace Keepr.Controllers
             
             try
             {
+                var claim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
                 var userId = "";
-                try
-                {
-                    userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                if(claim != null){
+                    userId = claim.Value;
                 }
-                catch(Exception e){}
 
                 return Ok(_ks.Get(id, userId));
             }

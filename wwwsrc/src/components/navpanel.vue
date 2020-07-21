@@ -43,7 +43,7 @@
             <small>Search</small></a
           >
         </li>
-        <li class="nav-item pill-style m-1">
+        <li class="nav-item pill-style m-1 ">
           <a
             class="nav-link p-1"
             id="pills-contact-tab"
@@ -127,10 +127,6 @@ export default {
       this.$store.dispatch("setBearer", this.$auth.bearer);
       console.log("this.$auth.user: ");
       console.log(this.$auth.user);
-    },
-    renderNavpanelVaultList() {
-      console.log("hello");
-      this.renderList = true;
     },
   },
   components: {

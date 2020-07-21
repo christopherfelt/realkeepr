@@ -1,6 +1,9 @@
 <template>
-  <div class="navpanelVaultListItem animate__animated animate__fadeIn">
-    {{ vault.name }} - {{ vault.show }} {{ index }}
+  <div
+    v-show="show"
+    class="navpanelVaultListItem animate__animated animate__fadeIn"
+  >
+    {{ vault.name }}
   </div>
 </template>
 
@@ -8,24 +11,19 @@
 export default {
   name: "navpanelVaultListItem",
   mounted() {
-    this.show();
+    setTimeout(() => {
+      this.show = true;
+    }, 300 * this.index);
   },
+
   data() {
-    return {};
+    return {
+      show: false,
+    };
   },
   computed: {},
   props: ["vault", "index"],
-  methods: {
-    show() {
-      let delay = 500 * this.index + 100;
-      var self = this;
-      setTimeout(() => {
-        self.vault.show = true;
-        console.log("hello form time out");
-      }, delay);
-      console.log("hello after time aout");
-    },
-  },
+  methods: {},
   components: {},
 };
 </script>

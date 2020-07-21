@@ -1,27 +1,85 @@
 <template>
   <div
-    class="dashboard-container m-3 p-3 animate__animated animate__fast animate__fadeIn"
+    class="dashboard-container container-fluid m-3 p-3 animate__animated animate__fast animate__fadeIn"
   >
-    <h1 class="ailerons text-center ">
-      DASHBOARD
-    </h1>
-    <button class="btn btn-danger" @click="logout">logout</button>
-    <!-- <button class="btn btn-success" @click="addKeep">Add Keep</button> -->
-    <button class="btn btn-success" @click="addVault">Add Vault</button>
-    <div
-      v-for="vault in vaults"
-      :key="vault.id"
-      class="card d-inline-block card-dems"
-    >
-      <img class="card-img-top" src="" alt="" />
-      <div class="card-body">
-        <router-link
-          :to="{ name: 'vaultDetail', params: { vaultId: vault.id } }"
-        >
-          <h4 class="card-title">{{ vault.name }}</h4>
-        </router-link>
-        <h6>Description</h6>
-        <p class="card-text">{{ vault.description }}</p>
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-danger float-right" @click="logout">
+          logout
+        </button>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col">
+        <h1 class="ailerons text-center ">
+          DASHBOARD
+        </h1>
+      </div>
+    </div>
+
+    <div class="row border-bottom">
+      <div class="col">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" @click="showVaultList = !showVaultList">
+            <a
+              class="nav-link active ailerons"
+              id="pills-vault-tab"
+              data-toggle="pill"
+              href="#pills-vaults"
+              role="tab"
+              aria-controls="pills-vaults"
+              aria-selected="true"
+              ><h3>Vaults</h3></a
+            >
+          </li>
+          <li class="nav-item ailerons">
+            <a
+              class="nav-link "
+              id="pills-keeps-tab"
+              data-toggle="pill"
+              href="#pills-keeps"
+              role="tab"
+              aria-controls="pills-keeps"
+              aria-selected="false"
+              ><h3>Keeps</h3></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="pills-tabContent" v-if="showVaultList">
+      <div
+        class="tab-pane fade show active"
+        id="pills-vaults"
+        role="tabpanel"
+        aria-labelledby="pills-vaults-tab"
+      >
+        <div class="row d-flex justify-content-center mt-3">
+          <div class="col-10 d-flex justify-content-start">
+            <VaultCard
+              v-for="(vault, index) in vaults"
+              :key="vault.id"
+              :vault="vault"
+              :index="index"
+            />
+            <button
+              v-if="showAddButton"
+              class="btn btn-primary mr-1 animate__animated animate__fadeIn"
+              @click="addVault"
+            >
+              Add Vault
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="pills-keeps"
+        role="tabpanel"
+        aria-labelledby="pills-keeps-tab"
+      >
+        ...
       </div>
     </div>
 
@@ -34,13 +92,29 @@
 
 <script>
 import "animate.css";
+import VaultCard from "@/components/vaultCard";
 export default {
   mounted() {
     this.$store.dispatch("getAllUserVaults");
+    this.$store.dispatch("getAllUserKeeps");
+    this.$store.dispatch("getAllUserDTOs");
+    this.showAddButton = false;
+    setTimeout(() => {
+      this.showAddButton = true;
+    }, 200 * this.vaultListLength);
+  },
+  data() {
+    return {
+      showAddButton: false,
+      showVaultList: false,
+    };
   },
   computed: {
     vaults() {
       return this.$store.state.VaultStore.activeVaults;
+    },
+    vaultListLength() {
+      return this.vaults.length;
     },
   },
   methods: {
@@ -54,6 +128,9 @@ export default {
     addVault() {
       $("#addVaultModal").modal("show");
     },
+  },
+  components: {
+    VaultCard,
   },
 };
 </script>
