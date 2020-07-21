@@ -20,7 +20,7 @@
     <div class="row border-bottom">
       <div class="col">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-          <li class="nav-item" @click="showVaultList = !showVaultList">
+          <li class="nav-item">
             <a
               class="nav-link active ailerons"
               id="pills-vault-tab"
@@ -79,7 +79,49 @@
         role="tabpanel"
         aria-labelledby="pills-keeps-tab"
       >
-        ...
+        <div class="row my-2">
+          <div class="col-10">
+            <button
+              class="btn btn-primary"
+              type="button"
+              data-toggle="collapse"
+              data-target="#allKeeps"
+              aria-expanded="false"
+              aria-controls="allKeeps"
+            >
+              All Keeps
+            </button>
+            <button
+              class="btn btn-primary"
+              type="button"
+              data-toggle="collapse"
+              data-target="#userCreatedKeeps"
+              aria-expanded="false"
+              aria-controls="userCreatedKeeps"
+            >
+              User Created Keeps
+            </button>
+          </div>
+        </div>
+        <div class="row my-2">
+          <div class="col-10">
+            <div class="collapse" id="allKeeps">
+              <KeepCard v-for="keep in keeps" :key="keep.id" :keep="keep" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-10">
+            <div class="collapse" id="userCreatedKeeps">
+              <KeepCard
+                v-for="keep in userCreatedKeeps"
+                :key="keep.id"
+                :keep="keep"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -93,11 +135,12 @@
 <script>
 import "animate.css";
 import VaultCard from "@/components/vaultCard";
+import KeepCard from "@/components/keepCard";
 export default {
   mounted() {
     this.$store.dispatch("getAllUserVaults");
+    this.$store.dispatch("getAllUserCreatedKeeps");
     this.$store.dispatch("getAllUserKeeps");
-    this.$store.dispatch("getAllUserDTOs");
     this.showAddButton = false;
     setTimeout(() => {
       this.showAddButton = true;
@@ -106,7 +149,7 @@ export default {
   data() {
     return {
       showAddButton: false,
-      showVaultList: false,
+      showVaultList: true,
     };
   },
   computed: {
@@ -115,6 +158,12 @@ export default {
     },
     vaultListLength() {
       return this.vaults.length;
+    },
+    keeps() {
+      return this.$store.state.KeepStore.activeUserKeeps;
+    },
+    userCreatedKeeps() {
+      return this.$store.state.KeepStore.activeUserCreatedKeeps;
     },
   },
   methods: {
@@ -131,6 +180,7 @@ export default {
   },
   components: {
     VaultCard,
+    KeepCard,
   },
 };
 </script>

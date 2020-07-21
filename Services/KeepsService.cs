@@ -44,6 +44,16 @@ namespace Keepr.Services
             return exists;
         }
 
+        internal IEnumerable<Keep> Get(string userId)
+        {
+            var exists = _repo.GetByUserId(userId);
+            if(exists == null)
+            {
+                throw new Exception("Invalid Keep Id");
+            }
+            return exists;
+        }
+
         public Keep Create(Keep newKeep)
         {
             return _repo.Create(newKeep);

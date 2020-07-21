@@ -53,8 +53,15 @@ export default {
   computed: {},
   methods: {
     deleteVault() {
-      let vaultId = $("#deleteConfirmationModal").data("vaultid");
-      this.$store.dispatch("deleteVault", vaultId);
+      let type = $("#deleteConfirmationModal").data("model");
+      let objectId;
+      if (type == "keep") {
+        objectId = $("#deleteConfirmationModal").data("keepid");
+        this.$store.dispatch("deleteKeep", objectId);
+      } else if (type == "vault") {
+        objectId = $("#deleteConfirmationModal").data("vaultid");
+        this.$store.dispatch("deleteVault", objectId);
+      }
       $("#deleteConfirmationModal").modal("toggle");
     },
   },

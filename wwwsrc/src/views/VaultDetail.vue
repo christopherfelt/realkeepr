@@ -1,32 +1,35 @@
 <template>
-  <div
-    class="vault-detail-container container-fluid m-3 p-3 text-center animate__animated animate__fast animate__fadeIn"
-  >
-    <div class="row">
-      <div class="col">
-        <button
-          class="btn btn-danger float-right"
-          @click="openDeleteVaultConfirmationModal"
-        >
-          Delete Vault
-        </button>
+  <div>
+    <div
+      class="vault-detail-container container-fluid m-3 p-3 text-center animate__animated animate__fast animate__fadeIn"
+    >
+      <div class="row">
+        <div class="col">
+          <button
+            class="btn btn-danger float-right"
+            @click="openDeleteVaultConfirmationModal"
+          >
+            Delete Vault
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h1 class="ailerons">{{ activeVault.name }}</h1>
+          <p class="">{{ activeVault.description }}</p>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-10 ">
+          <div class="keep-container">
+            <KeepCard v-for="keep in activeKeeps" :key="keep.id" :keep="keep" />
+            <button class="btn btn-success" @click="openAddKeepModal">
+              Add Keep
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <h1 class="ailerons">{{ activeVault.name }}</h1>
-        <p class="">{{ activeVault.description }}</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col d-flex justify-content-center">
-        <KeepCard v-for="keep in activeKeeps" :key="keep.id" :keep="keep" />
-        <button class="btn btn-success" @click="openAddKeepModal">
-          Add Keep
-        </button>
-      </div>
-    </div>
-    <!-- {{ activeVault }} -->
   </div>
 </template>
 
@@ -66,7 +69,7 @@ export default {
       $("#addKeepModal").modal("toggle");
     },
     openDeleteVaultConfirmationModal() {
-      // $("d")
+      $("#deleteConfirmationModal").data("model", "vault");
       $("#deleteConfirmationModal").data("vaultid", this.activeVault.id);
       $("#deleteConfirmationModal")
         .find("#span-title")
@@ -90,5 +93,10 @@ export default {
   left: 18%;
   width: 80%;
   height: auto;
+}
+
+.keep-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>

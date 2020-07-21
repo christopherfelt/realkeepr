@@ -33,8 +33,6 @@ namespace Keepr.Controllers
             };
         }
 
-        // get user keeps
-        
 
         [HttpPost]
         [Authorize]
@@ -52,6 +50,20 @@ namespace Keepr.Controllers
             }
         }
 
+        [HttpGet("user")]
+        [Authorize]
+        public ActionResult<IEnumerable<Keep>> GetByUserId()
+        {
+            try
+            {
+                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_ks.Get(userId));
+            } 
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            };
+        }
 
         [HttpGet("{id}")]
         public ActionResult<Keep> GetById(int id)

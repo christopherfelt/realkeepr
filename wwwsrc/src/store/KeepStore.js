@@ -1,10 +1,12 @@
 import { api } from "./AxiosService";
+import router from "../router";
 
 export const KeepStore = {
   state: {
     activeKeeps: [],
     activeKeepDetail: {},
     activeUserKeeps: [],
+    activeUserCreatedKeeps: [],
   },
   mutations: {
     setActiveKeeps(state, keeps) {
@@ -15,6 +17,9 @@ export const KeepStore = {
     },
     setActiveUserKeeps(state, keeps) {
       state.activeUserKeeps = keeps;
+    },
+    setActiveUserCreatedKeeps(state, keeps) {
+      state.activeUserCreatedKeeps = keeps;
     },
   },
   actions: {
@@ -33,9 +38,17 @@ export const KeepStore = {
         console.error(error);
       }
     },
-    async getAllUserKeeps({ commit, dispatch }) {
+    async getAllUserCreatedKeeps({ commit, dispatch }) {
       try {
         let res = await api.get("keeps/user");
+        commit("setActiveUserCreatedKeeps", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getAllUserKeeps({ commit, dispatch }) {
+      try {
+        let res = await api.get("vaultkeeps");
         commit("setActiveUserKeeps", res.data);
       } catch (error) {
         console.error(error);
@@ -88,6 +101,16 @@ export const KeepStore = {
         let res = await api.delete(
           "vaultkeeps/" + dto.keepId + "/" + dto.vaultId
         );
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteKeep({ dispatch }, keepId) {
+      try {
+        let res = await api.delete("keeps/" + keepId);
+        dispatch("getAllUserKeeps");
+        dispatch("getAllUserCreatedKeeps");
+        router.push({ name: "dashboard" });
       } catch (error) {
         console.error(error);
       }

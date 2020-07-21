@@ -32,6 +32,11 @@ namespace keepr.Services
             return _repo.Create(newVault);
         }
 
+        internal IEnumerable<VaultKeepViewModel> Get(string userId)
+        {
+            return _repo.GetKeepsByUserId(userId);
+        }
+
         internal DTOVaultKeep Delete(int id)
         {
             DTOVaultKeep exists = Get(id);
