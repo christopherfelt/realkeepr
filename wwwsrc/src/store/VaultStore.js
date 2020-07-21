@@ -4,6 +4,7 @@ export const VaultStore = {
   state: {
     activeVaults: [],
     activeVaultDetail: {},
+    authToken: {},
   },
   mutations: {
     setActiveVaults(state, vaults) {
@@ -12,10 +13,15 @@ export const VaultStore = {
     setActiveVaultDetail(state, activeVault) {
       state.activeVaultDetail = activeVault;
     },
+    setAuthToken(state, authToken) {
+      console.log("auth token", authToken);
+      state.authToken = authToken;
+    },
   },
   actions: {
-    setBearer({}, bearer) {
+    setBearer({ commit }, bearer) {
       api.defaults.headers.authorization = bearer;
+      commit("setAuthToken", bearer);
     },
     resetBearer() {
       api.defaults.headers.authorization = "";

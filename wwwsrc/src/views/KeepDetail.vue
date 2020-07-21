@@ -118,7 +118,7 @@ export default {
 }
 
 .placeholder {
-  width: 60rem;
-  height: 40rem;
+  width: 40vw;
+  height: 40vh;
 }
 </style>

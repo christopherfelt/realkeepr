@@ -86,9 +86,13 @@
           aria-labelledby="pills-contact-tab"
         >
           <!-- <About /> -->
-          <router-link v-if="$auth.isAuthenticated" :to="{ name: 'dashboard' }"
-            >Go To Dashboard
-          </router-link>
+          <div v-if="$auth.isAuthenticated">
+            <router-link :to="{ name: 'dashboard' }"
+              >Go To Dashboard
+            </router-link>
+            <NavpanelVaultList />
+          </div>
+
           <button class="btn btn-success" @click="login" v-else>
             Login
           </button>
@@ -100,12 +104,14 @@
 
 <script>
 import Playback from "@/components/playback.vue";
+import NavpanelVaultList from "@/components/navpanelVaultList.vue";
 import "animate.css";
 export default {
   name: "NavPanel",
   data() {
     return {
       fadeStatus: false,
+      renderList: false,
     };
   },
   computed: {},
@@ -122,9 +128,14 @@ export default {
       console.log("this.$auth.user: ");
       console.log(this.$auth.user);
     },
+    renderNavpanelVaultList() {
+      console.log("hello");
+      this.renderList = true;
+    },
   },
   components: {
     Playback,
+    NavpanelVaultList,
   },
 };
 </script>
