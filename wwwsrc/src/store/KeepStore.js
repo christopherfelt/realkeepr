@@ -54,14 +54,14 @@ export const KeepStore = {
         console.error(error);
       }
     },
-    async getKeepById({ commit, state }, keepId) {
+    async getKeepById({ commit, dispatch, state }, keepId) {
       try {
         let activeKeep = state.activeKeeps.find((k) => k.id == keepId);
         if (activeKeep == undefined) {
           activeKeep = await api.get("keeps/" + keepId);
           activeKeep = activeKeep.data;
         }
-
+        dispatch("addViewToKeep", activeKeep);
         commit("setActiveKeepDetail", activeKeep);
       } catch (error) {
         console.error(error);
@@ -91,6 +91,7 @@ export const KeepStore = {
     },
     async addKeepToVault({ commit }, dto) {
       try {
+        console.log(dto);
         let res = await api.post("vaultkeeps/", dto);
       } catch (error) {
         console.error(error);
@@ -111,6 +112,25 @@ export const KeepStore = {
         dispatch("getAllUserKeeps");
         dispatch("getAllUserCreatedKeeps");
         router.push({ name: "dashboard" });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async addViewToKeep({ state }, keepData) {
+      try {
+        console.log("keepdata", keepData);
+        keepData.views = keepData.views += 1;
+        await api.put("keeps/" + keepData.id, keepData);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async addKeepToKeep({ state }, keepId) {
+      try {
+        let activeKeep = state.activeKeepDetail;
+        console.log(activeKeep);
+        activeKeep.keeps = activeKeep.keeps += 1;
+        await api.put("keeps/" + keepId, activeKeep);
       } catch (error) {
         console.error(error);
       }

@@ -42,9 +42,6 @@
                     >
                       {{ vault.name }}
                     </option>
-                    <!-- <option value="14">this one</option>
-                  <option value="12">Postman vault</option>
-                  <option value="13">Postman vault 2</option> -->
                   </select>
                 </div>
               </div>
@@ -61,7 +58,7 @@
             <button
               type="button"
               class="btn btn-primary"
-              @click="addKeepToAnotherVault"
+              @click="addKeepToVault"
             >
               Submit
             </button>
@@ -85,19 +82,25 @@ export default {
     activeVaults() {
       return this.$store.state.VaultStore.activeVaults;
     },
+    activeKeepDetail() {
+      return this.$store.state.KeepStore.activeKeepDetail;
+    },
   },
   methods: {
     getVaultIdFromOption() {
       this.vaultSelection = event.currentTarget.value;
+      console.log(this.vaultSelection);
     },
-    addKeepToAnotherVault() {
+    addKeepToVault() {
       let keepId = $("#addKeepToVaultModal").data("keepid");
+      // this.getVaultIdFromOption();
       let dto = {
         vaultId: parseInt(this.vaultSelection),
         keepId: parseInt(keepId),
       };
       if (dto.vaultId != "no choice") {
         this.$store.dispatch("addKeepToVault", dto);
+        this.$store.dispatch("addKeepToKeep", keepId);
       }
       $("#addKeepToVaultModal").modal("toggle");
     },

@@ -20,6 +20,7 @@
 import Navbar from "@/components/navbar";
 import Navpanel from "@/components/navpanel";
 import { onAuth } from "@bcwdev/auth0-vue";
+
 import AddKeepModal from "@/components/addKeepModal";
 import EditKeepModal from "@/components/editKeepModal";
 import AddVaultModal from "@/components/addVaultModal";
@@ -31,7 +32,7 @@ export default {
   async beforeCreate() {
     await onAuth();
     this.$store.dispatch("setBearer", this.$auth.bearer);
-    // this.$store.dispatch("getAllUserVaults");
+    this.$store.dispatch("getAllUserVaults");
   },
   components: {
     Navbar,

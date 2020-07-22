@@ -1,17 +1,14 @@
 <template>
-  <div
-    v-if="show"
-    class="card d-inline-block card-dems mx-1 animate__animated animate__fadeIn"
-  >
-    <img class="card-img-top" src="" alt="" />
-    <div class="card-body">
-      <router-link :to="{ name: 'vaultDetail', params: { vaultId: vault.id } }">
-        <h4 class="card-title">{{ vault.name }}</h4>
-      </router-link>
-      <!-- <h6>Description</h6>
-      <p class="card-text">{{ vault.description }}</p> -->
+  <router-link :to="{ name: 'vaultDetail', params: { vaultId: vault.id } }">
+    <div
+      v-if="show"
+      class="vaultCard m-1 p-3 text-center rounded animate__animated animate__fadeIn"
+    >
+      <div class="">
+        <h6 class="">{{ vault.name }}</h6>
+      </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -34,4 +31,18 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.vaultCard {
+  width: 175px;
+  height: 200px;
+  transition-duration: 0.75s;
+  background-color: lightgray;
+}
+
+.vaultCard:hover {
+  background-color: #d8dbe2;
+}
+a:hover {
+  text-decoration: none;
+}
+</style>

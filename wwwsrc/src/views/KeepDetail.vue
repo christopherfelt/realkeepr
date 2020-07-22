@@ -5,24 +5,32 @@
     <h1 class="ailerons text-center ">{{ activeKeep.name }}</h1>
     <div class="d-flex justify-content-center">
       <div>
-        <div class="placeholder">asdf</div>
-        <div>
+        <img class="placeholder" :src="activeKeep.img" />
+        <div class="my-3">
           <h6>{{ activeKeep.description }}</h6>
         </div>
         <div>
+          <h6>Views: {{ activeKeep.views }} | Adds: {{ activeKeep.keeps }}</h6>
+        </div>
+        <div>
           <div
+            class="d-inline"
             v-if="
               $auth.isAuthenticated &&
                 activeKeep.userId != $auth.user.sub &&
                 !keepInUserKeeps
             "
           >
-            <button class="btn btn-primary" @click="openAddKeepToVaultModal">
+            <button
+              class="btn btn-primary mx-1"
+              @click="openAddKeepToVaultModal"
+            >
               Add to Vault
             </button>
           </div>
           <div
-            v-else-if="
+            class="d-inline"
+            v-if="
               $auth.isAuthenticated &&
                 activeKeep.userId == $auth.user.sub &&
                 activeKeep.isPrivate
@@ -31,30 +39,40 @@
             <button class="btn btn-primary" @click="openEditKeepModal">
               Edit
             </button>
-            <button class="btn btn-primary">
-              Change Vault
-            </button>
-            <button class="btn btn-primary" @click="openAddKeepToVaultModal">
-              Add to another vault
-            </button>
-            <button class="btn btn-danger" @click="removeFromVault">
-              Remove from vault
-            </button>
             <button
-              class="btn btn-danger"
+              class="btn btn-danger mx-1"
               @click="openDeleteKeepConfirmationModal"
             >
               Delete Keep
             </button>
           </div>
-          <div v-else>
-            <button class="btn btn-primary">
+          <div class="d-inline" v-if="$auth.isAuthenticated && keepInUserKeeps">
+            <!-- <button class="btn btn-primary mx-1" @click="removeFromVault">
               Change Vault
-            </button>
-            <button class="btn btn-primary" @click="openAddKeepToVaultModal">
+            </button> -->
+            <button
+              class="btn btn-primary mx-1"
+              @click="openAddKeepToVaultModal"
+            >
               Add to Another Vault
             </button>
           </div>
+          <div class="d-inline" v-if="$auth.isAuthenticated && keepInUserKeeps">
+            <button class="btn btn-danger mx-1" @click="removeFromVault">
+              Remove from vault
+            </button>
+          </div>
+          <!-- <div
+            class="d-inline"
+            v-if="$auth.isAuthenticated && activeKeep.userId == $auth.user.sub"
+          >
+            <button
+              class="btn btn-danger mx-1"
+              @click="openDeleteKeepConfirmationModal"
+            >
+              Delete Keep
+            </button>
+          </div> -->
         </div>
       </div>
     </div>
@@ -121,6 +139,7 @@ export default {
       let dto = { vaultId: this.activeVault.id, keepId: this.activeKeep.id };
       console.log(dto);
       this.$store.dispatch("removeKeepFromVault", dto);
+      this.$router.push({ name: "dashboard" });
     },
     openDeleteKeepConfirmationModal() {
       $("#deleteConfirmationModal").data("model", "keep");
@@ -149,6 +168,6 @@ export default {
 
 .placeholder {
   width: 40vw;
-  height: 40vh;
+  height: 50vh;
 }
 </style>

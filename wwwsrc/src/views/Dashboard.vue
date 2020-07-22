@@ -1,6 +1,6 @@
 <template>
   <div
-    class="dashboard-container container-fluid m-3 p-3 animate__animated animate__fast animate__fadeIn"
+    class="dashboard-container container-fluid m-3 p-3 animate__animated animate__fadeIn"
   >
     <div class="row">
       <div class="col">
@@ -56,20 +56,19 @@
         aria-labelledby="pills-vaults-tab"
       >
         <div class="row d-flex justify-content-center mt-3">
-          <div class="col-10 d-flex justify-content-start">
+          <div class="col-10 vault-container">
+            <button
+              class="btn btn-primary m-1 add-vault-button animate__animated animate__fadeIn "
+              @click="addVault"
+            >
+              Add Vault
+            </button>
             <VaultCard
               v-for="(vault, index) in vaults"
               :key="vault.id"
               :vault="vault"
               :index="index"
             />
-            <button
-              v-if="showAddButton"
-              class="btn btn-primary mr-1 animate__animated animate__fadeIn"
-              @click="addVault"
-            >
-              Add Vault
-            </button>
           </div>
         </div>
       </div>
@@ -82,7 +81,7 @@
         <div class="row my-2">
           <div class="col-10">
             <button
-              class="btn btn-primary"
+              class="btn btn-primary mr-2"
               type="button"
               data-toggle="collapse"
               data-target="#allKeeps"
@@ -92,7 +91,7 @@
               All Keeps
             </button>
             <button
-              class="btn btn-primary"
+              class="btn btn-primary mr-2"
               type="button"
               data-toggle="collapse"
               data-target="#userCreatedKeeps"
@@ -105,7 +104,8 @@
         </div>
         <div class="row my-2">
           <div class="col-10">
-            <div class="collapse" id="allKeeps">
+            <h6>All Keeps</h6>
+            <div class="collapse  keep-container" id="allKeeps">
               <KeepCard v-for="keep in keeps" :key="keep.id" :keep="keep" />
             </div>
           </div>
@@ -113,7 +113,8 @@
 
         <div class="row my-2">
           <div class="col-10">
-            <div class="collapse" id="userCreatedKeeps">
+            <h6>User Created Keeps</h6>
+            <div class="collapse keep-container" id="userCreatedKeeps">
               <KeepCard
                 v-for="keep in userCreatedKeeps"
                 :key="keep.id"
@@ -141,14 +142,9 @@ export default {
     this.$store.dispatch("getAllUserVaults");
     this.$store.dispatch("getAllUserCreatedKeeps");
     this.$store.dispatch("getAllUserKeeps");
-    this.showAddButton = false;
-    setTimeout(() => {
-      this.showAddButton = true;
-    }, 200 * this.vaultListLength);
   },
   data() {
     return {
-      showAddButton: false,
       showVaultList: true,
     };
   },
@@ -215,5 +211,19 @@ export default {
   width: 150px;
   height: 300px;
   background-color: black;
+}
+
+.keep-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.vault-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.add-vault-button {
+  width: 175px;
+  height: 200px;
 }
 </style>

@@ -69,9 +69,16 @@
                   id="vault-select"
                   @click="getVaultIdFromOption($event)"
                 >
-                  <option value="14">this one</option>
+                  <!-- <option value="14">this one</option>
                   <option value="12">Postman vault</option>
-                  <option value="13">Postman vault 2</option>
+                  <option value="13">Postman vault 2</option> -->
+                  <option
+                    v-for="vault in activeVaults"
+                    :key="vault.id"
+                    :value="vault.id"
+                  >
+                    {{ vault.name }}
+                  </option>
                 </select>
               </div>
               <div class="form-check">
@@ -121,19 +128,28 @@ export default {
       },
     };
   },
-  computed: {},
+  computed: {
+    activeVaults() {
+      return this.$store.state.VaultStore.activeVaults;
+    },
+    activeVaultDetail() {
+      return this.$store.state.VaultStore.activeVaultDetail;
+    },
+  },
   methods: {
     getVaultIdFromOption() {
       console.log(event.currentTarget.value);
       this.keepForm.vaultId = event.currentTarget.value;
     },
     createNewKeep() {
-      let modalForm = document.getElementById("addKeepModal");
+      // let modalForm = document.getElementById("addKeepModal");
       if (!("vaultId" in this.keepForm)) {
-        this.keepForm.vaultId = modalForm.dataset.vault
-          ? modalForm.dataset.vault
-          : "";
+        this.keepForm.vaultId = $("#addKeepModal").data("vault");
+        // ? modalForm.dataset.vault
+        // : "";
       }
+
+      console.log(this.activeVaultDetail.id);
       console.log(this.keepForm);
       this.keepForm.vaultId = parseInt(this.keepForm.vaultId);
       this.$store.dispatch("createNewKeep", this.keepForm);

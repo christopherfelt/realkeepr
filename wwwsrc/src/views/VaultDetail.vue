@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="vault-detail-container container-fluid m-3 p-3 text-center animate__animated animate__fast animate__fadeIn"
+      class="vault-detail-container container-fluid m-3 p-3 animate__animated animate__fadeIn"
     >
       <div class="row">
         <div class="col">
@@ -13,7 +13,7 @@
           </button>
         </div>
       </div>
-      <div class="row">
+      <div class="row text-center">
         <div class="col">
           <h1 class="ailerons">{{ activeVault.name }}</h1>
           <p class="">{{ activeVault.description }}</p>
@@ -22,10 +22,18 @@
       <div class="row d-flex justify-content-center">
         <div class="col-10 ">
           <div class="keep-container">
-            <KeepCard v-for="keep in activeKeeps" :key="keep.id" :keep="keep" />
-            <button class="btn btn-success" @click="openAddKeepModal">
+            <button
+              class="btn btn-success m-2 add-keep-button"
+              @click="openAddKeepModal"
+            >
               Add Keep
             </button>
+            <KeepCard
+              v-for="(keep, index) in activeKeeps"
+              :key="keep.id"
+              :keep="keep"
+              :index="index"
+            />
           </div>
         </div>
       </div>
@@ -54,7 +62,7 @@ export default {
   },
   methods: {
     openAddKeepModal() {
-      $("#addKeepModal").attr("data-vault", this.$route.params.vaultId);
+      $("#addKeepModal").data("vault", this.$route.params.vaultId);
       let options = $("#addKeepModal")
         .find("#vault-select")
         .children();
@@ -98,5 +106,10 @@ export default {
 .keep-container {
   display: flex;
   flex-wrap: wrap;
+}
+
+.add-keep-button {
+  width: 300px;
+  height: 200px;
 }
 </style>

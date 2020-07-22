@@ -1,11 +1,23 @@
 <template>
   <div
-    class="home-container p-3 animate__animated animate__fast animate__fadeIn"
+    class="home-container container-fluid p-3 animate__animated animate__fast animate__fadeIn"
   >
     <h1 class="ailerons text-center ">
       HOME
     </h1>
-    <KeepCard v-for="keep in keeps" :key="keep.id" :keep="keep" />
+
+    <div class="row d-flex justify-content-center">
+      <div class="col-10 ">
+        <div class="keep-container">
+          <KeepCard
+            v-for="(keep, index) in keeps"
+            :key="keep.id"
+            :keep="keep"
+            :index="index"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -54,5 +66,10 @@ export default {
   width: 300px;
   height: 200px;
   background-color: black;
+}
+
+.keep-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>

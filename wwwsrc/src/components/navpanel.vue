@@ -90,7 +90,7 @@
             <router-link :to="{ name: 'dashboard' }"
               >Go To Dashboard
             </router-link>
-            <NavpanelVaultList />
+            <!-- <NavpanelVaultList /> -->
           </div>
 
           <button class="btn btn-success" @click="login" v-else>

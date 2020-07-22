@@ -1,52 +1,40 @@
 <template>
-  <!-- <div class="card d-inline-block card-dems">
-    <img class="card-img-top" src="" alt="" />
-    <div class="card-body">
-
-      <div>
-        <img src="//placehold.it/300x200" alt="" />
+  <div class="m-2 animate__animated animate__fast animate__fadeIn" v-if="show">
+    <!-- <div class="placholderyt"></div> -->
+    <img class="placholderyt img-fluid" :src="keep.img" alt="" />
+    <router-link
+      v-if="$auth.isAuthenticated"
+      :to="{ name: 'keepDetail', params: { keepId: keep.id } }"
+    >
+      <div class=" remove-underline rounded-bottom pl-2 py-1 keep">
+        <h6 class="keep-title ">{{ keep.name }}</h6>
       </div>
-      <p class="card-text">{{ keep.description }}</p>
-      <h6>Private</h6>
-      <p class="card-text">{{ keep.isPrivate }}</p>
-      <h6>Views</h6>
-      <p class="card-text">{{ keep.views }}</p>
-      <h6>Keeps</h6>
-      <p class="card-text">{{ keep.keeps }}</p>
-    </div>
-  </div> -->
-  <div class="card-dems m-1">hello</div>
-
-  <!-- <div class="card" style="width: 18rem;">
-    <img
-      class="card-img-top"
-      src="//placehold.it/300x200"
-      alt="Card image cap"
-    />
-    <div class="card-body">
-      <router-link
-        v-if="$auth.isAuthenticated"
-        :to="{ name: 'keepDetail', params: { keepId: keep.id } }"
-      >
-        <h4 class="card-title">{{ keep.name }}</h4>
-      </router-link>
-      <router-link
-        v-else
-        :to="{ name: 'keepDetailPublic', params: { keepId: keep.id } }"
-      >
-        <h4 class="card-title">{{ keep.name }}</h4>
-      </router-link>
-    </div>
-  </div> -->
+    </router-link>
+    <router-link
+      v-else
+      :to="{ name: 'keepDetailPublic', params: { keepId: keep.id } }"
+    >
+      <div class=" remove-underline rounded-bottom text-center py-1 keep">
+        <h6 class="keep-title">{{ keep.name }}</h6>
+      </div>
+    </router-link>
+  </div>
 </template>
 
 <script>
 export default {
   name: "keepCard",
-  data() {
-    return {};
+  mounted() {
+    setTimeout(() => {
+      this.show = true;
+    }, 200 * this.index);
   },
-  props: ["keep"],
+  data() {
+    return {
+      show: false,
+    };
+  },
+  props: ["keep", "index"],
   computed: {},
   methods: {},
   components: {},
@@ -54,9 +42,28 @@ export default {
 </script>
 
 <style scoped>
-.card-dems {
+.keep {
+  transition-duration: 0.75s;
+}
+
+.keep:hover {
+  background-color: #d8dbe2;
+}
+.placholderyt {
   width: 300px;
   height: 200px;
-  background-color: black;
+  /* background-color: black; */
+  transition-duration: 0.5s;
+  /* box-shadow: 2px 2px 4px 1px; */
+}
+
+.placholderyt:hover {
+  width: 301px;
+  height: 201px;
+  box-shadow: 0 0 4px 1px;
+}
+
+a:hover {
+  text-decoration: none;
 }
 </style>

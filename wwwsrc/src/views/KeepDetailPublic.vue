@@ -5,20 +5,12 @@
     <h1 class="ailerons text-center ">{{ activeKeep.name }}</h1>
     <div class="d-flex justify-content-center">
       <div>
-        <div class="placeholder">asdf</div>
-        <div>
-          <h3>Description:</h3>
-          <p>{{ activeKeep.description }}</p>
+        <img class="placeholder" :src="activeKeep.img" />
+        <div class="my-3">
+          <h6>{{ activeKeep.description }}</h6>
         </div>
         <div>
-          <button
-            v-show="
-              $auth.isAuthenticated && activeKeep.userId != $auth.user.sub
-            "
-            class="btn btn-primary"
-          >
-            Add to Vault
-          </button>
+          <h6>Views: {{ activeKeep.views }} | Adds: {{ activeKeep.keeps }}</h6>
         </div>
       </div>
     </div>
@@ -55,7 +47,7 @@ export default {
 }
 
 .placeholder {
-  width: 60rem;
-  height: 40rem;
+  width: 40vw;
+  height: 50vh;
 }
 </style>
