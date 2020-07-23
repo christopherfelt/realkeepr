@@ -7,7 +7,7 @@
     </h1>
 
     <div class="row d-flex justify-content-center">
-      <div class="col-10 ">
+      <div class="col">
         <div class="keep-container">
           <KeepCard
             v-for="(keep, index) in keeps"
@@ -71,5 +71,6 @@ export default {
 .keep-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 </style>

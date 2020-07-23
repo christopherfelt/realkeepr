@@ -1,5 +1,5 @@
 <template>
-  <div class="component">
+  <div class="deleteConfimationModal">
     <div
       class="modal fade"
       tabindex="-1"
@@ -46,7 +46,7 @@
 
 <script>
 export default {
-  name: "component",
+  name: "deleteConfimationModal",
   data() {
     return {};
   },

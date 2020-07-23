@@ -31,11 +31,55 @@
 export default {
   name: "Playback",
   data() {
-    return {};
+    return {
+      paused: false,
+      playing: false,
+      stopped: false,
+    };
   },
-  computed: {},
-  methods: {},
+  computed: {
+    playBackState() {
+      return this.$store.state.PlaybackStore.playBackState;
+    },
+    currentlyPlayingVideo() {
+      return this.$store.state.PlaybackStore.currentlyPlayingVideo;
+    },
+  },
+  methods: {
+    playBackClick(event) {
+      this.$store.dispatch("changePlayBackState", event);
+    },
+    nextClick() {
+      let nextSong = this.currentlyPlayingVideo + 1;
+      this.$store.dispatch("changeSong", nextSong);
+    },
+    previousClick() {
+      let previousSong = this.currentlyPlayingVideo - 1;
+      this.$store.dispatch("changeSong", previousSong);
+    },
+  },
   components: {},
+  watch: {
+    playBackState: function() {
+      if (this.playBackState == "paused") {
+        this.paused = true;
+        this.playing = false;
+        this.stopped = false;
+      } else if (this.playBackState == "playing") {
+        this.paused = false;
+        this.playing = true;
+        this.stopped = false;
+      } else if (this.playBackState == "stopped") {
+        this.paused = false;
+        this.playing = false;
+        this.stopped = true;
+      } else {
+        this.paused = false;
+        this.playing = false;
+        this.stopped = false;
+      }
+    },
+  },
 };
 </script>
 
@@ -44,5 +88,18 @@ export default {
 
 .heading-4-color {
   color: black;
+}
+
+.playback-button {
+  transition-duration: 250ms;
+}
+
+.playback-button:hover {
+  background-color: lightgray;
+}
+
+.pbActive {
+  // background-color: #3e5c76;
+  color: #748cab;
 }
 </style>

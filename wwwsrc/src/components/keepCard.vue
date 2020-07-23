@@ -1,7 +1,17 @@
 <template>
   <div class="m-2 animate__animated animate__fast animate__fadeIn" v-if="show">
-    <!-- <div class="placholderyt"></div> -->
-    <img class="placholderyt img-fluid" :src="keep.img" alt="" />
+    <div class="placholderyt" :class="{ isCurrent: isCurrent }">
+      <youtube
+        :video-id="keep.img"
+        width="300px"
+        height="200px"
+        ref="youtube"
+        @ended="nextSong"
+        @playing="setCurrentPlayingVideo"
+      ></youtube>
+    </div>
+    <!-- <img class="placholderyt img-fluid" :src="keep.img" alt="" /> -->
+
     <router-link
       v-if="$auth.isAuthenticated"
       :to="{ name: 'keepDetail', params: { keepId: keep.id } }"
@@ -35,9 +45,51 @@ export default {
     };
   },
   props: ["keep", "index"],
-  computed: {},
-  methods: {},
+  computed: {
+    currentlyPlayingVideo() {
+      return this.$store.state.PlaybackStore.currentlyPlayingVideo;
+    },
+    playBackState() {
+      return this.$store.state.PlaybackStore.playBackState;
+    },
+    isCurrent() {
+      return this.currentlyPlayingVideo == this.index;
+    },
+  },
+  methods: {
+    nextSong() {
+      let nextSong = this.currentlyPlayingVideo + 1;
+      this.$store.dispatch("changeSong", nextSong);
+    },
+    setCurrentPlayingVideo() {
+      this.$store.dispatch("setCurrentPlayingVideo", this.index);
+    },
+  },
   components: {},
+  watch: {
+    playBackState: function() {
+      if (
+        this.playBackState == "playing" &&
+        this.index == this.currentlyPlayingVideo
+      ) {
+        this.$refs.youtube.player.playVideo();
+      } else if (
+        this.playBackState == "paused" &&
+        this.index == this.currentlyPlayingVideo
+      ) {
+        this.$refs.youtube.player.pauseVideo();
+      } else {
+        this.$refs.youtube.player.stopVideo();
+      }
+    },
+    currentlyPlayingVideo: function() {
+      if (this.currentlyPlayingVideo == this.index) {
+        this.$refs.youtube.player.playVideo();
+      } else {
+        this.$refs.youtube.player.stopVideo();
+      }
+    },
+  },
 };
 </script>
 
@@ -58,8 +110,12 @@ export default {
 }
 
 .placholderyt:hover {
-  width: 301px;
-  height: 201px;
+  /* width: 301px;
+  height: 201px; */
+  box-shadow: 0 0 4px 1px;
+}
+
+.isCurrent {
   box-shadow: 0 0 4px 1px;
 }
 

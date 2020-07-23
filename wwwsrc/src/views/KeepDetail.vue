@@ -5,7 +5,14 @@
     <h1 class="ailerons text-center ">{{ activeKeep.name }}</h1>
     <div class="d-flex justify-content-center">
       <div>
-        <img class="placeholder" :src="activeKeep.img" />
+        <div class="placeholder" :src="activeKeep.img">
+          <youtube
+            :video-id="activeKeep.img"
+            width="100%"
+            height="100%"
+            ref="youtube"
+          ></youtube>
+        </div>
         <div class="my-3">
           <h6>{{ activeKeep.description }}</h6>
         </div>

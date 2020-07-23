@@ -58,10 +58,10 @@
         <div class="row d-flex justify-content-center mt-3">
           <div class="col-10 vault-container">
             <button
-              class="btn btn-primary m-1 add-vault-button animate__animated animate__fadeIn "
+              class="btn btn-primary m-1 add-vault-button ailerons animate__animated animate__fadeIn "
               @click="addVault"
             >
-              Add Vault
+              ADD
             </button>
             <VaultCard
               v-for="(vault, index) in vaults"
@@ -225,5 +225,6 @@ export default {
 .add-vault-button {
   width: 175px;
   height: 200px;
+  font-size: 30px;
 }
 </style>

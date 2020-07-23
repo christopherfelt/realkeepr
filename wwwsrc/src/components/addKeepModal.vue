@@ -52,8 +52,11 @@
                   id="keep-video-url"
                   placeholder="youtube/?watch="
                   v-model="keepForm.img"
+                  v-on:input="validateYoutubeURL"
                 />
-                <small>Insert a url for a youtube video</small>
+                <small v-if="!urlIsValidated" style="color:red;"
+                  >Insert a url for a youtube video</small
+                >
               </div>
               <div class="form-group dropdown show">
                 <label for="keep-vault">Vault</label>
@@ -117,6 +120,7 @@
 </template>
 
 <script>
+import rp from "../../ResponseProcessing";
 export default {
   name: "addKeepModal",
   mounted() {},
@@ -126,6 +130,7 @@ export default {
         isPrivate: true,
         vaultName: "",
       },
+      urlIsValidated: true,
     };
   },
   computed: {
@@ -141,20 +146,20 @@ export default {
       console.log(event.currentTarget.value);
       this.keepForm.vaultId = event.currentTarget.value;
     },
+    validateYoutubeURL() {
+      this.urlIsValidated = rp.validateYoutubeURL(this.keepForm.img);
+    },
     createNewKeep() {
-      // let modalForm = document.getElementById("addKeepModal");
-      if (!("vaultId" in this.keepForm)) {
-        this.keepForm.vaultId = $("#addKeepModal").data("vault");
-        // ? modalForm.dataset.vault
-        // : "";
+      if (this.urlIsValidated) {
+        this.keepForm.img = rp.processSingleURL(this.keepForm.img)[1];
+        if (!("vaultId" in this.keepForm)) {
+          this.keepForm.vaultId = $("#addKeepModal").data("vault");
+        }
+        this.keepForm.vaultId = parseInt(this.keepForm.vaultId);
+        this.$store.dispatch("createNewKeep", this.keepForm);
+        $("#addKeepModal").modal("toggle");
+        this.keepForm = {};
       }
-
-      console.log(this.activeVaultDetail.id);
-      console.log(this.keepForm);
-      this.keepForm.vaultId = parseInt(this.keepForm.vaultId);
-      this.$store.dispatch("createNewKeep", this.keepForm);
-      $("#addKeepModal").modal("toggle");
-      this.keepForm = {};
     },
   },
   components: {},

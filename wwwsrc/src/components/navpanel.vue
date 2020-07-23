@@ -10,10 +10,9 @@
         MUSIC MOS <span class="a-in-title">A</span>IC
       </h3> -->
     </div>
-    <!-- <Playback /> -->
+    <Playback />
     <div
       class="d-flex justify-content-center p-1 mt-3 animate__animated animate__fadeInUp"
-      :class="{ animate__fadeOutUp: fadeStatus }"
     >
       <ul class="nav nav-pills" id="pills-tab" role="tablist">
         <li class="nav-item pill-style m-1">
@@ -25,7 +24,6 @@
             role="tab"
             aria-controls="pills-home"
             aria-selected="true"
-            @click="changeFadeStatus()"
           >
             <small> Browse </small>
           </a>
@@ -59,7 +57,7 @@
         </li>
       </ul>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-start ml-5">
       <div class="tab-content" id="pills-tabContent">
         <div
           class="tab-pane"
@@ -67,8 +65,7 @@
           role="tabpanel"
           aria-labelledby="pills-home-tab"
         >
-          <!-- <Browse /> -->
-          browse
+          <Browse />
         </div>
         <div
           class="tab-pane fade"
@@ -105,6 +102,7 @@
 <script>
 import Playback from "@/components/playback.vue";
 import NavpanelVaultList from "@/components/navpanelVaultList.vue";
+import Browse from "@/components/navpanelComponents/browse.vue";
 import "animate.css";
 export default {
   name: "NavPanel",
@@ -132,6 +130,7 @@ export default {
   components: {
     Playback,
     NavpanelVaultList,
+    Browse,
   },
 };
 </script>
