@@ -10,6 +10,9 @@ import VaultDetail from "./views/VaultDetail.vue";
 import KeepDetail from "./views/KeepDetail.vue";
 // @ts-ignore
 import KeepDetailPublic from "./views/KeepDetailPublic.vue";
+// @ts-ignore
+import SubredditDetail from "./views/SubredditDetail.vue";
+
 import { authGuard } from "@bcwdev/auth0-vue";
 
 Vue.use(Router);
@@ -43,6 +46,11 @@ export default new Router({
       path: "/keepPublic/:keepId",
       name: "keepDetailPublic",
       component: KeepDetailPublic,
+    },
+    {
+      path: "/subreddit/:subreddit",
+      name: "subredditDetail",
+      component: SubredditDetail,
     },
   ],
 });

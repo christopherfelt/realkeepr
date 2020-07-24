@@ -111,7 +111,8 @@ namespace Keepr.Controllers
         {
             try
             {
-                return Ok(_ks.Delete(id));
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_ks.Delete(id, userId));
             }
             catch (Exception e)
             {

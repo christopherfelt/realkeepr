@@ -5,6 +5,7 @@ import router from "../router";
 import { KeepStore } from "./KeepStore";
 import { VaultStore } from "./VaultStore";
 import { PlaybackStore } from "./PlaybackStore";
+import { RedditStore } from "./RedditStore";
 
 Vue.use(Vuex);
 
@@ -35,5 +36,6 @@ export default new Vuex.Store({
     KeepStore,
     VaultStore,
     PlaybackStore,
+    RedditStore,
   },
 });

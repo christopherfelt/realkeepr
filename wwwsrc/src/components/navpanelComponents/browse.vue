@@ -2,45 +2,62 @@
   <div class="browse position-relative">
     <div
       class="animate__animated"
-      :class="{ animate__fadeOutLeft: invisibleStatus }"
+      :class="{
+        animate__fadeInRight: firstBrowseMenuCreation,
+        animate__fadeInLeft:
+          mainBrowseMenuVisibilityStatus && !firstBrowseMenuCreation,
+        animate__fadeOutLeft: !mainBrowseMenuVisibilityStatus,
+        animate__fast: !mainBrowseMenuVisibilityStatus,
+      }"
     >
       <ul class="nav flex-column nav-tab" id="myTab" role="tablist">
         <li class="nav-item">
           <a
-            class="nav-link"
+            class="nav-link py-0"
             data-toggle="tab"
             role="tab"
             href="#musaic-community"
-            @click="changeInvisibilityStatus()"
+            @click="changeVisibilityStatus()"
             >Musaic Community</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" role="tab" href="#reddit"
+          <a
+            class="nav-link py-0"
+            data-toggle="tab"
+            role="tab"
+            href="#reddit"
+            @click="changeVisibilityStatus()"
             >Reddit</a
           >
         </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" role="tab" href="#">Link</a>
-        </li>
       </ul>
     </div>
-    <div class="tab-content position-absolute position-zero" id="myTabContent">
+    <div
+      class="tab-content position-absolute animate__animated position-zero"
+      :class="{
+        animate__fadeInRight: tabsPanelsVisibilityStatus,
+        animate__faster: !tabsPanelsVisibilityStatus,
+        animate__fadeOutRight: !tabsPanelsVisibilityStatus,
+      }"
+      id="myTabContent"
+    >
       <div
-        class="tab-pane fade animate__animated animate__fadeInRight"
+        class="tab-pane fade "
         id="musaic-community"
         role="tabpanel"
         aria-labelledby="muscaic-tab"
       >
-        Musaic Community
+        Musaic Tags
       </div>
       <div
         class="tab-pane fade"
+        :class="{}"
         id="reddit"
         role="tabpanel"
         aria-labelledby="reddit-tab"
       >
-        reddit stuff
+        <RedditGenres @backButtonClick="changeVisibilityStatusBack" />
       </div>
     </div>
   </div>
@@ -48,21 +65,34 @@
 
 <script>
 import "animate.css";
+import RedditGenres from "@/components/navpanelComponents/redditGenres.vue";
+import BreadCrumb from "@/components/navpanelComponents/breadCrumb.vue";
 export default {
   name: "browse",
+  mounted() {},
   data() {
     return {
-      invisibleStatus: false,
+      firstBrowseMenuCreation: true,
+      mainBrowseMenuVisibilityStatus: true,
+      tabsPanelsVisibilityStatus: false,
     };
   },
   computed: {},
   methods: {
-    changeInvisibilityStatus() {
-      console.log("invisibeStatus");
-      this.invisibleStatus = true;
+    changeVisibilityStatus() {
+      this.firstBrowseMenuCreation = false;
+      this.mainBrowseMenuVisibilityStatus = false;
+      this.tabsPanelsVisibilityStatus = true;
+    },
+    changeVisibilityStatusBack() {
+      this.tabsPanelsVisibilityStatus = false;
+      this.mainBrowseMenuVisibilityStatus = true;
     },
   },
-  components: {},
+  components: {
+    BreadCrumb,
+    RedditGenres,
+  },
 };
 </script>
 

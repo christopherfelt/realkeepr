@@ -59,11 +59,15 @@ namespace Keepr.Services
             return _repo.Create(newKeep);
         }
 
-        internal Keep Delete(int id)
+        internal Keep Delete(int id, string userId)
         {
             Keep exists = Get(id);
-            _repo.Delete(id);
-            return exists;
+            if(exists.UserId == userId){
+
+                _repo.Delete(id);
+                return exists;
+            }
+            throw new Exception("You cannot delete the given keep");
         }
 
         internal Keep Edit(Keep keepToUpdate, string userId)

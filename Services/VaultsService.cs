@@ -19,10 +19,10 @@ namespace keepr.Services
             return _repo.Get(userId);
         }
 
-        internal Vault Get(int id)
+        internal Vault Get(int id, string userId)
         {
             Vault exists = _repo.GetById(id);
-            if(exists == null)
+            if(exists == null || exists.UserId != userId)
             {
                 throw new Exception("Invalid Vault Id");
             }
@@ -36,19 +36,23 @@ namespace keepr.Services
 
         internal Vault Edit(Vault vaultToUpdate, string userId)
         {
-            Vault foundVault = Get(vaultToUpdate.Id);
+            Vault foundVault = _repo.GetById(vaultToUpdate.Id);
             if(foundVault.UserId == userId && _repo.Edit(vaultToUpdate, userId))
             {
                 return vaultToUpdate;
             }
-            throw new Exception("You can edit the given vault");
+            throw new Exception("You cannot edit the given vault");
         }
 
-        internal Vault Delete(int id)
+        internal Vault Delete(int id, string userId)
         {
-            Vault exists = Get(id);
-            _repo.Delete(id);
-            return exists;
+            Vault exists = _repo.GetById(id);
+            if(exists.UserId == userId){
+                _repo.Delete(id);
+                return exists;
+            }
+            throw new Exception("You cannot delete the given vault");
+
         }
     }
 }
