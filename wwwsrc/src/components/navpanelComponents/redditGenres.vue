@@ -93,6 +93,9 @@ export default {
 </script>
 
 <style scoped>
+.redditGenres {
+}
+
 .backButton {
   color: #6f9b98;
   width: 18px;

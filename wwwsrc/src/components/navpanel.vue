@@ -158,7 +158,8 @@ export default {
   width: 17%;
   top: 0;
   left: 0;
-  height: 100vh;
+  // height: 100vh;
+  // overflow-y: scroll;
   z-index: 999;
 }
 .bg-panel {

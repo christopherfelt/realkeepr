@@ -54,5 +54,20 @@ export default {
 .genresContainer {
   color: #155f59;
   font-size: 13px;
+  height: 60vh;
+  overflow-y: auto;
+}
+
+.genresContainer::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.genresContainer::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+}
+
+.genresContainer::-webkit-scrollbar-thumb {
+  /* background-color: darkgrey;
+  outline: 1px solid slategrey; */
 }
 </style>
