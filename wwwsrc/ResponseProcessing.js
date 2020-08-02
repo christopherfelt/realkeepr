@@ -3,7 +3,7 @@ export default class ResponseProcessing {
     let youtubeCollection = [];
     let otherCollection = [];
     for (let i = 0; i < subredditPostCollection.length; i++) {
-      console.log(subredditPostCollection[i].data.url);
+      // console.log(subredditPostCollection[i].data.url);
       let result = this.processSingleURL(subredditPostCollection[i].data.url);
       if (result[0]) {
         youtubeCollection.push(result[1]);

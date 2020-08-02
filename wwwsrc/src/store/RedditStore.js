@@ -28,20 +28,31 @@ export const RedditStore = {
     ],
     subreddits: [],
     activeSubredditPosts: [],
+    readyIndicators: 0,
   },
   mutations: {
     setSubreddits(state, data) {
-      console.log("in mutionat");
-      console.log(data);
       Vue.set(state.subreddits, data.id, data.data);
     },
     setActiveSubredditPosts(state, data) {
       state.activeSubredditPosts = data;
     },
+    resetReadyIndicators(state) {
+      state.readyIndicators = 0;
+    },
+    updateReadyStatus(state) {
+      // Vue.set(state.readyIndicators, index, true);
+      console.log("Number Ready: ", state.readyIndicators);
+      state.readyIndicators = state.readyIndicators + 1;
+    },
+  },
+  getters: {
+    videosReady: (state) => {
+      return state.activeSubredditPosts.length == state.readyIndicators;
+    },
   },
   actions: {
     getSubredditsByGenre({ commit, dispatch }) {
-      console.log("in action");
       let keys = Object.keys(gl);
       for (let i = 0; i < keys.length; i++) {
         let key = keys[i];
@@ -50,10 +61,17 @@ export const RedditStore = {
         commit("setSubreddits", { id: key, data: subredditsList });
       }
     },
+    resetReadyIndicators({ commit }) {
+      commit("resetReadyIndicators");
+    },
+    updateReadyStatus({ commit, dispatch }) {
+      commit("updateReadyStatus");
+    },
     async getSubredditVideos({ commit, dispatch }, subreddit) {
       try {
         let res = await api.get(subreddit + "/hot.json?limit=50");
         let result = rp.processResponseURls(res.data.data.children);
+        console.log("subreddit videos");
         commit("setActiveSubredditPosts", result[0]);
         // commit("setCurrentPlaylist", subreddit);
         commit("changeCurrentPlayingVideoNumber", 0, { root: true });

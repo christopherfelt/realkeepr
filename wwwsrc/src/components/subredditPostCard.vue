@@ -1,6 +1,13 @@
 <template>
-  <div class="m-2 animate__animated animate__fast animate__fadeIn" v-if="show">
-    <div class="placholderyt" :class="{ isCurrent: isCurrent }">
+  <!-- animate__animated animate_faster animate__fadeIn -->
+  <div class="spc-container m-2 ">
+    <!-- <div
+      width="300px"
+      height="200px"
+      style="background-color:black;"
+      v-show="!show"
+    ></div> -->
+    <div class="yt-container " :class="{ isCurrent: isCurrent }">
       <youtube
         :video-id="subredditId"
         width="300px"
@@ -8,37 +15,16 @@
         ref="youtube"
         @ended="nextSong"
         @playing="setCurrentPlayingVideo"
+        @ready="updateReadyStatus"
       ></youtube>
     </div>
-    <!-- <img class="placholderyt img-fluid" :src="keep.img" alt="" /> -->
-
-    <!-- <router-link
-      v-if="$auth.isAuthenticated"
-      :to="{ name: 'keepDetail', params: { keepId: keep.id } }"
-    >
-      <div class=" remove-underline rounded-bottom pl-2 py-1 keep">
-        <h6 class="keep-title ">{{ keep.name }}</h6>
-      </div>
-    </router-link>
-    <router-link
-      v-else
-      :to="{ name: 'keepDetailPublic', params: { keepId: keep.id } }"
-    >
-      <div class=" remove-underline rounded-bottom text-center py-1 keep">
-        <h6 class="keep-title">{{ keep.name }}</h6>
-      </div>
-    </router-link> -->
   </div>
 </template>
 
 <script>
 export default {
   name: "subredditPostCard",
-  mounted() {
-    setTimeout(() => {
-      this.show = true;
-    }, 200 * this.index);
-  },
+  mounted() {},
   data() {
     return {
       show: false,
@@ -55,6 +41,9 @@ export default {
     isCurrent() {
       return this.currentlyPlayingVideo == this.index;
     },
+    videosReady() {
+      return this.$store.getters.videosReady;
+    },
   },
   methods: {
     nextSong() {
@@ -63,6 +52,9 @@ export default {
     },
     setCurrentPlayingVideo() {
       this.$store.dispatch("setCurrentPlayingVideo", this.index);
+    },
+    updateReadyStatus() {
+      this.$store.dispatch("updateReadyStatus");
     },
   },
   components: {},
@@ -89,6 +81,15 @@ export default {
         this.$refs.youtube.player.stopVideo();
       }
     },
+    videosReady: function() {
+      if (this.videosReady) {
+        setTimeout(() => {
+          this.show = true;
+        }, 375 * (this.index + 1));
+      } else {
+        this.show = false;
+      }
+    },
   },
 };
 </script>
@@ -104,15 +105,20 @@ export default {
 .placholderyt {
   width: 300px;
   height: 200px;
-  /* background-color: black; */
-  transition-duration: 0.5s;
+  background-color: black;
+  /* transition-duration: 0.5s; */
   /* box-shadow: 2px 2px 4px 1px; */
+}
+
+.yt-container {
+  width: 300px;
+  height: 200px;
 }
 
 .placholderyt:hover {
   /* width: 301px;
   height: 201px; */
-  box-shadow: 0 0 4px 1px;
+  /* box-shadow: 0 0 4px 1px; */
 }
 
 .isCurrent {

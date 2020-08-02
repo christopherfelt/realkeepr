@@ -9,7 +9,7 @@
         <router-link
           :to="{ name: 'subredditDetail', params: { subreddit: sub } }"
         >
-          <p class="m-0">{{ sub }}</p>
+          <p class="m-0" @click="getSubredditVideos(sub)">{{ sub }}</p>
         </router-link>
       </div>
     </div>
@@ -32,6 +32,10 @@ export default {
   methods: {
     goBackToGenresMenu() {
       this.$emit("backButtonClicked");
+    },
+    getSubredditVideos(subreddit) {
+      this.$store.dispatch("getSubredditVideos", subreddit);
+      this.$store.dispatch("resetReadyIndicators");
     },
   },
   components: {},
