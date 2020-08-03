@@ -38,6 +38,7 @@
           :key="subredditId"
           :subredditId="subredditId"
           :index="index"
+          :subredditName="subredditName"
         />
         <!-- <div
           class="w-100 animate__animated animate__fadeIn"
@@ -60,7 +61,9 @@ export default {
     this.$store.dispatch("resetReadyIndicators");
   },
   data() {
-    return {};
+    return {
+      subredditName: this.$route.params.subreddit,
+    };
   },
   computed: {
     subredditPosts() {

@@ -48,7 +48,7 @@ export const RedditStore = {
   },
   getters: {
     videosReady: (state) => {
-      return state.activeSubredditPosts.length == state.readyIndicators;
+      return state.activeSubredditPosts.length <= state.readyIndicators;
     },
   },
   actions: {
@@ -64,7 +64,7 @@ export const RedditStore = {
     resetReadyIndicators({ commit }) {
       commit("resetReadyIndicators");
     },
-    updateReadyStatus({ commit, dispatch }) {
+    updateReadyStatus({ commit }) {
       commit("updateReadyStatus");
     },
     async getSubredditVideos({ commit, dispatch }, subreddit) {
