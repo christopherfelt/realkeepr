@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="row border-bottom">
+    <!-- <div class="row border-bottom">
       <div class="col">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
           <li class="nav-item">
@@ -46,9 +46,25 @@
           </li>
         </ul>
       </div>
+    </div> -->
+    <div class="row d-flex justify-content-center mt-3">
+      <div class="col-10 vault-container">
+        <button
+          class="btn btn-primary m-1 add-vault-button ailerons animate__animated animate__fadeIn "
+          @click="addVault"
+        >
+          ADD
+        </button>
+        <VaultCard
+          v-for="(vault, index) in vaults"
+          :key="vault.id"
+          :vault="vault"
+          :index="index"
+        />
+      </div>
     </div>
 
-    <div class="tab-content" id="pills-tabContent" v-if="showVaultList">
+    <!-- <div class="tab-content" id="pills-tabContent" v-if="showVaultList">
       <div
         class="tab-pane fade show active"
         id="pills-vaults"
@@ -124,7 +140,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- public {{ publicKeeps }} user {{ userKeeps }} -->
     <!-- TODO Loop through vaults and have a spot for total stats or something -->

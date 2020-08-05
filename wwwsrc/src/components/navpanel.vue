@@ -28,9 +28,9 @@
             <small> Browse </small>
           </a>
         </li>
-        <li class="nav-item pill-style">
+        <li class="nav-item pill-style m-1">
           <a
-            class="nav-link"
+            class="nav-link p-1"
             id="pills-profile-tab"
             data-toggle="pill"
             href="#pills-profile"
@@ -73,8 +73,7 @@
           role="tabpanel"
           aria-labelledby="pills-profile-tab"
         >
-          <!-- <SearchReddit /> -->
-          search
+          <Search />
         </div>
         <div
           class="tab-pane fade"
@@ -82,17 +81,7 @@
           role="tabpanel"
           aria-labelledby="pills-contact-tab"
         >
-          <!-- <About /> -->
-          <div v-if="$auth.isAuthenticated">
-            <router-link :to="{ name: 'dashboard' }"
-              >Go To Dashboard
-            </router-link>
-            <!-- <NavpanelVaultList /> -->
-          </div>
-
-          <button class="btn btn-success" @click="login" v-else>
-            Login
-          </button>
+          <DashboardPanel />
         </div>
       </div>
     </div>
@@ -103,6 +92,8 @@
 import Playback from "@/components/playback.vue";
 import NavpanelVaultList from "@/components/navpanelVaultList.vue";
 import Browse from "@/components/navpanelComponents/browse.vue";
+import Search from "@/components/navpanelComponents/search.vue";
+import DashboardPanel from "@/components/navpanelComponents/dashboardPanel.vue";
 import "animate.css";
 export default {
   name: "NavPanel",
@@ -131,6 +122,8 @@ export default {
     Playback,
     NavpanelVaultList,
     Browse,
+    Search,
+    DashboardPanel,
   },
 };
 </script>

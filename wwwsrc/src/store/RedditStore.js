@@ -5,6 +5,11 @@ import rp from "../../ResponseProcessing";
 
 let gl = require("../../genrelist.json");
 
+let allSubreddits = [];
+for (const key in gl) {
+  allSubreddits.push(...gl[key]);
+}
+
 const api = axios.create({
   baseURL: "https://www.reddit.com/r/",
   timeout: 3000,
@@ -29,6 +34,7 @@ export const RedditStore = {
     subreddits: [],
     activeSubredditPosts: [],
     readyIndicators: 0,
+    allSubreddits: allSubreddits,
   },
   mutations: {
     setSubreddits(state, data) {

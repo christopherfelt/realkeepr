@@ -2,11 +2,16 @@
   <div id="app">
     <!-- <div class="d-none">
       <navbar />
-      <router-view />
     </div> -->
     <div>
       <navpanel />
       <router-view />
+      <!-- <SubredditDetail
+        :to="{ name: 'subredditDetail', params: { subreddit: 'listenToThis' } }"
+      /> -->
+      <!-- <router-view
+        :to="{ name: 'subredditDetail', params: { subreddit: 'listenToThis' } }"
+      /> -->
     </div>
     <AddKeepModal />
     <EditKeepModal />
@@ -19,13 +24,14 @@
 <script>
 import Navbar from "@/components/navbar";
 import Navpanel from "@/components/navpanel";
+import SubredditDetail from "@/views/SubredditDetail.vue";
 import { onAuth } from "@bcwdev/auth0-vue";
 
-import AddKeepModal from "@/components/addKeepModal";
-import EditKeepModal from "@/components/editKeepModal";
-import AddVaultModal from "@/components/addVaultModal";
-import AddKeepToVaultModal from "@/components/addKeepToVaultModal";
-import DeleteConfirmationModal from "@/components/deleteConfirmationModal";
+import AddKeepModal from "@/components/modals/addKeepModal";
+import EditKeepModal from "@/components/modals/editKeepModal";
+import AddVaultModal from "@/components/modals/addVaultModal";
+import AddKeepToVaultModal from "@/components/modals/addKeepToVaultModal";
+import DeleteConfirmationModal from "@/components/modals/deleteConfirmationModal";
 
 export default {
   name: "App",
@@ -33,6 +39,13 @@ export default {
     await onAuth();
     this.$store.dispatch("setBearer", this.$auth.bearer);
     this.$store.dispatch("getAllUserVaults");
+  },
+  mounted() {
+    this.$router.push({
+      name: "subredditDetail",
+      params: { subreddit: "listentothis" },
+    });
+    this.$store.dispatch("getSubredditVideos", this.$route.params.subreddit);
   },
   components: {
     Navbar,
@@ -42,6 +55,7 @@ export default {
     AddKeepToVaultModal,
     EditKeepModal,
     DeleteConfirmationModal,
+    SubredditDetail,
   },
 };
 </script>

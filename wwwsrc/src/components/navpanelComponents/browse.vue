@@ -11,7 +11,7 @@
       }"
     >
       <ul class="nav flex-column nav-tab" id="myTab" role="tablist">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a
             class="nav-link py-0"
             data-toggle="tab"
@@ -20,7 +20,7 @@
             @click="changeVisibilityStatus()"
             >Musaic Community</a
           >
-        </li>
+        </li> -->
         <li class="nav-item">
           <a
             class="nav-link py-0"
@@ -69,7 +69,9 @@ import RedditGenres from "@/components/navpanelComponents/redditGenres.vue";
 import BreadCrumb from "@/components/navpanelComponents/breadCrumb.vue";
 export default {
   name: "browse",
-  mounted() {},
+  mounted() {
+    // this.changeVisibilityStatus();
+  },
   data() {
     return {
       firstBrowseMenuCreation: true,
