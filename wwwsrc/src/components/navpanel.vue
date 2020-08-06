@@ -10,6 +10,9 @@
         MUSIC MOS <span class="a-in-title">A</span>IC
       </h3> -->
     </div>
+    <!-- <button class="btn btn-primary" @click="toggleMobileNavPanel">
+      close
+    </button> -->
     <Playback />
     <div
       class="d-flex justify-content-center p-1 mt-3 animate__animated animate__fadeInUp"
@@ -117,6 +120,9 @@ export default {
       console.log("this.$auth.user: ");
       console.log(this.$auth.user);
     },
+    toggleMobileNavPanel() {
+      this.$emit("backButtonClick");
+    },
   },
   components: {
     Playback,
@@ -146,15 +152,13 @@ export default {
   src: url("../assets/fonts/nordic/nordic.ttf");
 }
 
-#sidebar {
-  position: fixed;
-  width: 17%;
-  top: 0;
-  left: 0;
-  // height: 100vh;
-  // overflow-y: scroll;
-  z-index: 999;
-}
+// #sidebar {
+//   position: fixed;
+//   width: 17%;
+//   top: 0;
+//   left: 0;
+//   z-index: 999;
+// }
 .bg-panel {
   background-color: $body-bg;
 }

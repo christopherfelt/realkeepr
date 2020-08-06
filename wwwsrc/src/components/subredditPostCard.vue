@@ -15,6 +15,7 @@
           width="300px"
           height="200px"
           ref="youtube"
+          :player-vars="playerVars"
           @ended="nextSong"
           @playing="setCurrentPlayingVideo"
           @ready="updateReadyStatus"
@@ -67,6 +68,11 @@ export default {
       ready: false,
       played: false,
       vaultsVisible: false,
+      playerVars: {
+        autoplay: 0,
+        playsinline: 1,
+        fs: 0,
+      },
     };
   },
   props: ["subredditId", "index", "subredditName"],

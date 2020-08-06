@@ -95,13 +95,13 @@ export default {
 </script>
 
 <style scoped>
-.vault-detail-container {
+/* .vault-detail-container {
   position: absolute;
   top: 0;
   left: 18%;
   width: 80%;
   height: auto;
-}
+} */
 
 .keep-container {
   display: flex;

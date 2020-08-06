@@ -1,17 +1,34 @@
 <template>
   <div id="app">
-    <!-- <div class="d-none">
-      <navbar />
-    </div> -->
     <div>
-      <navpanel />
-      <router-view />
-      <!-- <SubredditDetail
-        :to="{ name: 'subredditDetail', params: { subreddit: 'listenToThis' } }"
-      /> -->
-      <!-- <router-view
-        :to="{ name: 'subredditDetail', params: { subreddit: 'listenToThis' } }"
-      /> -->
+      <div class="navpanel" :class="{ openNavPanel: navPanelIsOpen }">
+        <navpanel @backButtonClick="toggleNavPanel" />
+      </div>
+      <div class="details">
+        <!-- <div class="sidebar-header m-3 d-flex justify-content-center">
+          <h1 class="anurati heading-1-color" @click="routeToHome">
+            MUS<span class="heading-4-color mr-2">A</span
+            ><span class="mr-2">I</span>C
+          </h1>
+        </div>
+        <Playback /> -->
+        <button
+          class="btn btn-primary m-1 d-sm-block d-md-none"
+          @click="toggleNavPanel"
+        >
+          <span class="anurati">M</span>
+        </button>
+        <router-view />
+        <div
+          class="overlay d-sm-block d-md-none animate__animated"
+          :class="{
+            animate__fadeIn: navPanelIsOpen,
+            animate__fadeOut: !navPanelIsOpen,
+            displayNone: !navPanelIsOpen,
+          }"
+          @click="toggleNavPanel"
+        ></div>
+      </div>
     </div>
     <AddKeepModal />
     <EditKeepModal />
@@ -24,6 +41,7 @@
 <script>
 import Navbar from "@/components/navbar";
 import Navpanel from "@/components/navpanel";
+import Playback from "@/components/playback";
 import SubredditDetail from "@/views/SubredditDetail.vue";
 import { onAuth } from "@bcwdev/auth0-vue";
 
@@ -32,6 +50,8 @@ import EditKeepModal from "@/components/modals/editKeepModal";
 import AddVaultModal from "@/components/modals/addVaultModal";
 import AddKeepToVaultModal from "@/components/modals/addKeepToVaultModal";
 import DeleteConfirmationModal from "@/components/modals/deleteConfirmationModal";
+
+import "animate.css";
 
 export default {
   name: "App",
@@ -47,6 +67,17 @@ export default {
     });
     this.$store.dispatch("getSubredditVideos", this.$route.params.subreddit);
   },
+  data() {
+    return {
+      navPanelIsOpen: true,
+    };
+  },
+  methods: {
+    toggleNavPanel() {
+      this.navPanelIsOpen = !this.navPanelIsOpen;
+      console.log("toggle navpanel");
+    },
+  },
   components: {
     Navbar,
     Navpanel,
@@ -56,6 +87,7 @@ export default {
     EditKeepModal,
     DeleteConfirmationModal,
     SubredditDetail,
+    Playback,
   },
 };
 </script>
@@ -65,12 +97,78 @@ export default {
 @import "bootstrap";
 @import "./assets/_overrides.scss";
 
-.wrapper {
+@font-face {
+  font-family: "anurati";
+  src: url("assets/fonts/anurati/Anurati-Regular.otf");
+}
+
+.anurati {
+  font-family: "anurati", sans-serif;
+}
+
+.app {
   display: flex;
   width: 100%;
 }
 
+.navpanel {
+  position: fixed;
+  width: 17%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background-color: $body-bg;
+}
+
+.details {
+  position: absolute;
+  top: 0;
+  left: 18%;
+  width: 80%;
+  height: auto;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition-duration: 0.5s;
+}
+.displayNone {
+  visibility: hidden;
+  pointer-events: none;
+  transition-delay: 1s;
+}
+
 .btn-primary {
   border: none;
+}
+
+.openNavPanel {
+}
+
+.disableFunctionality {
+}
+
+@media screen and (max-width: 767.98px) {
+  .details {
+    left: 0;
+    width: 100%;
+  }
+  .navpanel {
+    left: -315px;
+    width: 75%;
+    transition-duration: 0.5s;
+  }
+  .openNavPanel {
+    transition-duration: 0.5s;
+    transform: translateX(300px);
+  }
+  .disableFunctionality {
+    pointer-events: none;
+  }
 }
 </style>

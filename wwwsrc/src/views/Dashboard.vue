@@ -215,13 +215,13 @@ export default {
 .ailerons {
   font-family: "ailerons", sans-serif;
 }
-.dashboard-container {
+/* .dashboard-container {
   position: absolute;
   top: 0;
   left: 18%;
   width: 80%;
   height: auto;
-}
+} */
 
 .test-card {
   width: 150px;

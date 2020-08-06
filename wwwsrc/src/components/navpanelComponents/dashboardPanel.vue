@@ -51,6 +51,12 @@ export default {
     getKeepsByVaultId(vaultId) {
       this.$store.dispatch("getKeepsByVaultId", vaultId);
     },
+    async login() {
+      await this.$auth.loginWithPopup();
+      this.$store.dispatch("setBearer", this.$auth.bearer);
+      console.log("this.$auth.user: ");
+      console.log(this.$auth.user);
+    },
   },
   components: {},
 };

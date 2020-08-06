@@ -48,14 +48,13 @@ export default {
 </script>
 
 <style lang="css">
-.home-container {
+/* .home-container {
   position: absolute;
   top: 0;
   left: 18%;
   width: 80%;
   height: auto;
-  /* border: 5px solid red; */
-}
+} */
 
 .card-dems {
   width: 200px;

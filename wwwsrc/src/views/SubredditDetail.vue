@@ -86,14 +86,13 @@ export default {
 </script>
 
 <style scoped>
-.subreddit-detail-container {
+/* .subreddit-detail-container {
   position: absolute;
   top: 0;
   left: 18%;
   width: 80%;
   height: auto;
-  /* border: 5px solid red; */
-}
+} */
 
 /* * {
   border: 1px solid red;
