@@ -9,9 +9,11 @@
       aria-hidden="true"
     >
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content border-0">
           <div class="modal-header">
-            <h5 class="modal-title" id="addKeepLabel">Add Keep</h5>
+            <h5 class="modal-title ailerons text-white" id="addKeepLabel">
+              Add Keep
+            </h5>
             <button
               type="button"
               class="close"
@@ -100,14 +102,14 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-secondary dangerButton"
               data-dismiss="modal"
             >
               Close
             </button>
             <button
               type="button"
-              class="btn btn-primary"
+              class="btn btn-success"
               @click="createNewKeep"
             >
               Submit
@@ -166,4 +168,13 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.modal-header {
+  color: white;
+  background-color: #1d2d44;
+}
+
+.modal-title {
+  font-size: 24px;
+}
+</style>

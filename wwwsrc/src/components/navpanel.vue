@@ -1,14 +1,10 @@
 <template>
   <nav id="sidebar" class="bg-panel">
     <div class="sidebar-header m-3 d-flex justify-content-center">
-      <!-- <h1 class="anurati heading-1-color">MUSIC</h1> -->
-      <h1 class="anurati heading-1-color" @click="routeToHome">
+      <h1 class="anurati heading-1-color cursor-pointer" @click="routeToRandom">
         MUS<span class="heading-4-color mr-2">A</span
         ><span class="mr-2">I</span>C
       </h1>
-      <!-- <h3 class="anurati heading-1-color">
-        MUSIC MOS <span class="a-in-title">A</span>IC
-      </h3> -->
     </div>
     <!-- <button class="btn btn-primary" @click="toggleMobileNavPanel">
       close
@@ -111,8 +107,13 @@ export default {
     routeToDashboard() {
       this.$router.push({ name: "dashboard" });
     },
-    routeToHome() {
-      this.$router.push({ name: "home" });
+    routeToRandom() {
+      this.$store.dispatch("getSubredditVideos", "listentothis");
+      this.$store.dispatch("resetReadyIndicators");
+      this.$router.push({
+        name: "subredditDetail",
+        params: { subreddit: "listentothis" },
+      });
     },
     async login() {
       await this.$auth.loginWithPopup();
@@ -152,13 +153,6 @@ export default {
   src: url("../assets/fonts/nordic/nordic.ttf");
 }
 
-// #sidebar {
-//   position: fixed;
-//   width: 17%;
-//   top: 0;
-//   left: 0;
-//   z-index: 999;
-// }
 .bg-panel {
   background-color: $body-bg;
 }
@@ -200,5 +194,9 @@ export default {
 }
 .remove-underline:hover {
   text-decoration: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 </style>

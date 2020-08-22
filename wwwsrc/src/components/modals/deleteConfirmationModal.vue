@@ -7,14 +7,14 @@
       id="deleteConfirmationModal"
     >
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">
+        <div class="modal-content border-0">
+          <div class="modal-header ">
+            <h5 class="modal-title ">
               Confirm Delete of <span id="span-title"> </span>
             </h5>
             <button
               type="button"
-              class="close"
+              class="close  text-white"
               data-dismiss="modal"
               aria-label="Close"
             >
@@ -27,15 +27,19 @@
             </p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" @click="deleteVault">
-              Delete
-            </button>
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-secondary bg-success border-0"
               data-dismiss="modal"
             >
               Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger dangerButton"
+              @click="deleteVault"
+            >
+              Delete
             </button>
           </div>
         </div>
@@ -69,4 +73,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.modal-header {
+  color: white;
+  background-color: #b80c09;
+}
+</style>

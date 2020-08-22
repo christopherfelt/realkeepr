@@ -4,7 +4,7 @@
   >
     <div class="row">
       <div class="col">
-        <button class="btn btn-danger float-right" @click="logout">
+        <button class="btn btn-danger dangerButton float-right" @click="logout">
           logout
         </button>
       </div>

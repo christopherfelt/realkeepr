@@ -8,13 +8,15 @@
       aria-labelledby="addVaultModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
+      <div class="modal-dialog " role="document">
+        <div class="modal-content border-0">
           <div class="modal-header">
-            <h5 class="modal-title" id="addVaultModalLabel">Modal title</h5>
+            <h5 class="modal-title ailerons" id="addVaultModalLabel">
+              Add Vault
+            </h5>
             <button
               type="button"
-              class="close"
+              class="close text-light"
               data-dismiss="modal"
               aria-label="Close"
             >
@@ -49,7 +51,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-secondary dangerButton"
               data-dismiss="modal"
             >
               Close
@@ -84,4 +86,13 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.modal-header {
+  color: white;
+  background-color: #155f59;
+}
+
+.modal-title {
+  font-size: 24px;
+}
+</style>

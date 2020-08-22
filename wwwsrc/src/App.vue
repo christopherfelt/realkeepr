@@ -153,6 +153,10 @@ export default {
 .disableFunctionality {
 }
 
+.dangerButton {
+  background-color: #b80c09;
+}
+
 @media screen and (max-width: 767.98px) {
   .details {
     left: 0;

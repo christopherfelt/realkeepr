@@ -43,6 +43,16 @@ export default {
 </script>
 
 <style scoped>
+.redditGenre {
+  width: 250px;
+}
+
+@media screen and (max-width: 767.98px) {
+  .redditGenre {
+    width: 225px;
+  }
+}
+
 .backButton {
   color: #6f9b98;
   width: 18px;

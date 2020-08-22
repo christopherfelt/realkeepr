@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col">
           <button
-            class="btn btn-danger float-right"
+            class="btn btn-danger dangerButton float-right"
             @click="openDeleteVaultConfirmationModal"
           >
             Delete Vault
