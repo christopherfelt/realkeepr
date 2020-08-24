@@ -13,7 +13,7 @@
             class="m-0"
             @click="
               getSubredditVideos(sub);
-              playVideoInNavPanel;
+              playVideoInNavPanel();
             "
           >
             {{ sub }}
@@ -44,9 +44,10 @@ export default {
     getSubredditVideos(subreddit) {
       this.$store.dispatch("getSubredditVideos", subreddit);
       this.$store.dispatch("resetReadyIndicators");
+      this.$store.dispatch("changePlayVideoInNavPanelStatus", false);
     },
     playVideoInNavPanel() {
-      this.$store.dispatch("changePlayVideoInNavPanelStatus", false);
+      console.log("from reddit genre");
     },
   },
   components: {},

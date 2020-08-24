@@ -60,9 +60,7 @@
 export default {
   name: "subredditPostCard",
   mounted() {
-    console.log("mounted!!");
     setTimeout(this.updateReadyStatus, 6000);
-    setTimeout(this.testTimeOut, 3000);
   },
   data() {
     return {
@@ -105,7 +103,6 @@ export default {
     },
     updateReadyStatus() {
       if (!this.ready) {
-        console.log("hit ready from index ", this.index);
         this.$store.dispatch("updateReadyStatus");
         this.ready = true;
       }

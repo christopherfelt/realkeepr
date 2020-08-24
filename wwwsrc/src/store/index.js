@@ -37,6 +37,7 @@ export default new Vuex.Store({
       api.defaults.headers.authorization = "";
     },
     changePlayVideoInNavPanelStatus({ commit }, playVideoInNavPanelValue) {
+      console.log("changePlayVideo status change");
       commit("setPlayVideoInNavPanelStatus", playVideoInNavPanelValue);
     },
   },

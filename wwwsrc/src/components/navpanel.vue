@@ -9,6 +9,7 @@
     <!-- <button class="btn btn-primary" @click="toggleMobileNavPanel">
       close
     </button> -->
+    {{ playVideoInNavPanel }}
     <div v-show="playVideoInNavPanel">
       <NavPanelVideos />
     </div>
