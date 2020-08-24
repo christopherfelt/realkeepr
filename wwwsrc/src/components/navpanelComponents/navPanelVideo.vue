@@ -1,5 +1,5 @@
 <template>
-  <div class="spc-container mx-2">
+  <div class="spc-container mx-2 d" v-show="isCurrent">
     <div
       class="yt-container position-relative"
       :class="{ isCurrent: isCurrent, displayOpen: vaultsVisible }"
@@ -18,7 +18,6 @@
           :player-vars="playerVars"
           @ended="nextSong"
           @playing="setCurrentPlayingVideo"
-          @ready="updateReadyStatus"
           @error="errorHandling"
         ></youtube>
       </div>
@@ -59,11 +58,7 @@
 <script>
 export default {
   name: "subredditPostCard",
-  mounted() {
-    console.log("mounted!!");
-    setTimeout(this.updateReadyStatus, 6000);
-    setTimeout(this.testTimeOut, 3000);
-  },
+  mounted() {},
   data() {
     return {
       show: false,
@@ -102,16 +97,6 @@ export default {
     },
     setCurrentPlayingVideo() {
       this.$store.dispatch("setCurrentPlayingVideo", this.index);
-    },
-    updateReadyStatus() {
-      if (!this.ready) {
-        console.log("hit ready from index ", this.index);
-        this.$store.dispatch("updateReadyStatus");
-        this.ready = true;
-      }
-    },
-    testTimeOut() {
-      console.log("timeout works");
     },
     errorHandling() {
       console.log("error id: ", this.subredditId);

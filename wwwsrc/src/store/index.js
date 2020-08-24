@@ -22,14 +22,22 @@ let api = Axios.create({
 export default new Vuex.Store({
   state: {
     publicKeeps: [],
+    playVideoInNavPanel: false,
   },
-  mutations: {},
+  mutations: {
+    setPlayVideoInNavPanelStatus(state, playVideoInNavPanelValue) {
+      state.playVideoInNavPanel = playVideoInNavPanelValue;
+    },
+  },
   actions: {
     setBearer({}, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
       api.defaults.headers.authorization = "";
+    },
+    changePlayVideoInNavPanelStatus({ commit }, playVideoInNavPanelValue) {
+      commit("setPlayVideoInNavPanelStatus", playVideoInNavPanelValue);
     },
   },
   modules: {

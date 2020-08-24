@@ -9,6 +9,9 @@
     <!-- <button class="btn btn-primary" @click="toggleMobileNavPanel">
       close
     </button> -->
+    <div v-show="playVideoInNavPanel">
+      <NavPanelVideos />
+    </div>
     <Playback />
     <div
       class="d-flex justify-content-center p-1 mt-3 animate__animated animate__fadeInUp"
@@ -93,6 +96,8 @@ import NavpanelVaultList from "@/components/navpanelVaultList.vue";
 import Browse from "@/components/navpanelComponents/browse.vue";
 import Search from "@/components/navpanelComponents/search.vue";
 import DashboardPanel from "@/components/navpanelComponents/dashboardPanel.vue";
+import SubredditPostCard from "@/components/subredditPostCard.vue";
+import NavPanelVideos from "@/components/navpanelComponents/navPanelVideos.vue";
 import "animate.css";
 export default {
   name: "NavPanel",
@@ -102,7 +107,11 @@ export default {
       renderList: false,
     };
   },
-  computed: {},
+  computed: {
+    playVideoInNavPanel() {
+      return this.$store.state.playVideoInNavPanel;
+    },
+  },
   methods: {
     routeToDashboard() {
       this.$router.push({ name: "dashboard" });
@@ -131,6 +140,8 @@ export default {
     Browse,
     Search,
     DashboardPanel,
+    SubredditPostCard,
+    NavPanelVideos,
   },
 };
 </script>

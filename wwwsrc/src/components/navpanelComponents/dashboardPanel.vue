@@ -1,6 +1,10 @@
 <template>
   <div class="dashboardPanel animate__animated animate__fadeInRight">
-    <div class="nav-item" v-if="$auth.isAuthenticated">
+    <div
+      class="nav-item"
+      v-if="$auth.isAuthenticated"
+      @click="playVideoInNavPanel()"
+    >
       <router-link class="nav-link" :to="{ name: 'dashboard' }"
         >Dashboard
       </router-link>
@@ -50,6 +54,10 @@ export default {
     },
     getKeepsByVaultId(vaultId) {
       this.$store.dispatch("getKeepsByVaultId", vaultId);
+    },
+    playVideoInNavPanel() {
+      console.log("playVideoInNavPanel");
+      this.$store.dispatch("changePlayVideoInNavPanelStatus", true);
     },
     async login() {
       await this.$auth.loginWithPopup();

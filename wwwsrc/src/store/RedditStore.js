@@ -75,7 +75,7 @@ export const RedditStore = {
     },
     async getSubredditVideos({ commit, dispatch }, subreddit) {
       try {
-        let res = await api.get(subreddit + "/hot.json?limit=50");
+        let res = await api.get(subreddit + "/hot.json?limit=25");
         let result = rp.processResponseURls(res.data.data.children);
         console.log("subreddit videos");
         commit("setActiveSubredditPosts", result[0]);
