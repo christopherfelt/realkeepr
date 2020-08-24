@@ -9,7 +9,15 @@
         <router-link
           :to="{ name: 'subredditDetail', params: { subreddit: sub } }"
         >
-          <p class="m-0" @click="getSubredditVideos(sub)">{{ sub }}</p>
+          <p
+            class="m-0"
+            @click="
+              getSubredditVideos(sub);
+              playVideoInNavPanel;
+            "
+          >
+            {{ sub }}
+          </p>
         </router-link>
       </div>
     </div>
@@ -36,6 +44,9 @@ export default {
     getSubredditVideos(subreddit) {
       this.$store.dispatch("getSubredditVideos", subreddit);
       this.$store.dispatch("resetReadyIndicators");
+    },
+    playVideoInNavPanel() {
+      this.$store.dispatch("changePlayVideoInNavPanelStatus", false);
     },
   },
   components: {},

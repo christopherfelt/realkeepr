@@ -19,6 +19,7 @@
           @ended="nextSong"
           @playing="setCurrentPlayingVideo"
           @error="errorHandling"
+          @ready="readyHandling"
         ></youtube>
       </div>
 
@@ -89,6 +90,9 @@ export default {
     vaults() {
       return this.$store.state.VaultStore.activeVaults;
     },
+    playVideoInNavPanel() {
+      return this.$store.state.playVideoInNavPanel;
+    },
   },
   methods: {
     nextSong() {
@@ -116,6 +120,9 @@ export default {
       console.log(keepData);
       this.displayVaults();
       this.$store.dispatch("createNewKeep", keepData);
+    },
+    readyHandling() {
+      this.$refs.youtube.player.mute();
     },
   },
   components: {},
@@ -149,6 +156,14 @@ export default {
         }, 375 * (this.index + 1));
       } else {
         this.show = false;
+      }
+    },
+    playVideoInNavPanel: function() {
+      if (this.playVideoInNavPanel) {
+        console.log("watch function");
+        this.$refs.youtube.player.unMute();
+      } else {
+        this.$refs.youtube.player.mute();
       }
     },
   },

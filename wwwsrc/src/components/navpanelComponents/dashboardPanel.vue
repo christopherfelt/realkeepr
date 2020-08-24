@@ -56,7 +56,6 @@ export default {
       this.$store.dispatch("getKeepsByVaultId", vaultId);
     },
     playVideoInNavPanel() {
-      console.log("playVideoInNavPanel");
       this.$store.dispatch("changePlayVideoInNavPanelStatus", true);
     },
     async login() {
