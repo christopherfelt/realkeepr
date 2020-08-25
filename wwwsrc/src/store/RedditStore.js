@@ -77,7 +77,6 @@ export const RedditStore = {
       try {
         let res = await api.get(subreddit + "/hot.json?limit=25");
         let result = rp.processResponseURls(res.data.data.children);
-        console.log("subreddit videos");
         commit("setActiveSubredditPosts", result[0]);
         // commit("setCurrentPlaylist", subreddit);
         commit("changeCurrentPlayingVideoNumber", 0, { root: true });

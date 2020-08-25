@@ -9,23 +9,73 @@
     <!-- <button class="btn btn-primary" @click="toggleMobileNavPanel">
       close
     </button> -->
-    {{ playVideoInNavPanel }}
-    <div v-show="playVideoInNavPanel">
+    <div
+      v-show="playVideoInNavPanel"
+      class="animate__animated"
+      :class="{
+        animate__fadeInDown: playVideoInNavPanel,
+        animate__fadeInUp: !playVideoInNavPanel,
+      }"
+    >
       <NavPanelVideos />
     </div>
     <Playback />
+
     <div
-      class="d-flex justify-content-center p-1 mt-3 animate__animated animate__fadeInUp"
+      class="d-flex justify-content-center p-1  animate__animated animate__fadeInUp"
+    >
+      <ul class="nav nav-tabs main-tab" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a
+            class="nav-link active"
+            id="music-tab"
+            data-toggle="tab"
+            href="#music"
+            role="tab"
+            aria-controls="music"
+            aria-selected="true"
+            >Music</a
+          >
+        </li>
+        <li class="nav-item" role="presentation">
+          <a
+            class="nav-link"
+            id="distractions-tab"
+            data-toggle="tab"
+            href="#distractions"
+            role="tab"
+            aria-controls="distractions"
+            aria-selected="false"
+            >Distractions</a
+          >
+        </li>
+        <li class="nav-item" role="presentation">
+          <a
+            class="nav-link"
+            id="distractions-tab"
+            data-toggle="tab"
+            href="#distractions"
+            role="tab"
+            aria-controls="distractions"
+            aria-selected="false"
+            >Dashboard</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div
+      class="d-flex justify-content-center p-1 animate__animated animate__fadeInUp"
     >
       <ul class="nav nav-pills" id="pills-tab" role="tablist">
         <li class="nav-item pill-style m-1">
           <a
             class="nav-link p-1"
-            id="pills-home-tab"
+            id="pills-browse-tab"
             data-toggle="pill"
-            href="#pills-home"
+            href="#pills-browse"
             role="tab"
-            aria-controls="pills-home"
+            aria-controls="pills-browse"
             aria-selected="true"
           >
             <small> Browse </small>
@@ -34,11 +84,11 @@
         <li class="nav-item pill-style m-1">
           <a
             class="nav-link p-1"
-            id="pills-profile-tab"
+            id="pills-search-tab"
             data-toggle="pill"
-            href="#pills-profile"
+            href="#pills-search"
             role="tab"
-            aria-controls="pills-profile"
+            aria-controls="pills-search"
             aria-selected="false"
           >
             <small>Search</small></a
@@ -47,11 +97,11 @@
         <li class="nav-item pill-style m-1 ">
           <a
             class="nav-link p-1"
-            id="pills-contact-tab"
+            id="pills-dashboard-tab"
             data-toggle="pill"
-            href="#pills-about"
+            href="#pills-dashboard"
             role="tab"
-            aria-controls="pills-contact"
+            aria-controls="pills-dashboard"
             aria-selected="false"
           >
             <small v-if="$auth.isAuthenticated">Dashboard</small>
@@ -64,25 +114,25 @@
       <div class="tab-content" id="pills-tabContent">
         <div
           class="tab-pane"
-          id="pills-home"
+          id="pills-browse"
           role="tabpanel"
-          aria-labelledby="pills-home-tab"
+          aria-labelledby="pills-browse-tab"
         >
           <Browse />
         </div>
         <div
           class="tab-pane fade"
-          id="pills-profile"
+          id="pills-search"
           role="tabpanel"
-          aria-labelledby="pills-profile-tab"
+          aria-labelledby="pills-search-tab"
         >
           <Search />
         </div>
         <div
           class="tab-pane fade"
-          id="pills-about"
+          id="pills-dashboard"
           role="tabpanel"
-          aria-labelledby="pills-contact-tab"
+          aria-labelledby="pills-dashboard-tab"
         >
           <DashboardPanel />
         </div>
@@ -210,5 +260,9 @@ export default {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.main-tab {
+  font-size: 11px;
 }
 </style>
