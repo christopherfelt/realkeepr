@@ -1,5 +1,5 @@
 <template>
-  <div class="spc-container mx-2 d" v-show="isCurrent">
+  <div class="spc-container mx-2">
     <div
       class="yt-container position-relative"
       :class="{ isCurrent: isCurrent, displayOpen: vaultsVisible }"
@@ -18,8 +18,8 @@
           :player-vars="playerVars"
           @ended="nextSong"
           @playing="setCurrentPlayingVideo"
+          @ready="updateReadyStatus"
           @error="errorHandling"
-          @ready="readyHandling"
         ></youtube>
       </div>
 
@@ -59,7 +59,9 @@
 <script>
 export default {
   name: "subredditPostCard",
-  mounted() {},
+  mounted() {
+    setTimeout(this.updateReadyStatus, 6000);
+  },
   data() {
     return {
       show: false,
@@ -90,9 +92,6 @@ export default {
     vaults() {
       return this.$store.state.VaultStore.activeVaults;
     },
-    playVideoInNavPanel() {
-      return this.$store.state.playVideoInNavPanel;
-    },
   },
   methods: {
     nextSong() {
@@ -101,6 +100,15 @@ export default {
     },
     setCurrentPlayingVideo() {
       this.$store.dispatch("setCurrentPlayingVideo", this.index);
+    },
+    updateReadyStatus() {
+      if (!this.ready) {
+        this.$store.dispatch("updateReadyStatus");
+        this.ready = true;
+      }
+    },
+    testTimeOut() {
+      console.log("timeout works");
     },
     errorHandling() {
       console.log("error id: ", this.subredditId);
@@ -120,9 +128,6 @@ export default {
       console.log(keepData);
       this.displayVaults();
       this.$store.dispatch("createNewKeep", keepData);
-    },
-    readyHandling() {
-      this.$refs.youtube.player.mute();
     },
   },
   components: {},
@@ -156,14 +161,6 @@ export default {
         }, 375 * (this.index + 1));
       } else {
         this.show = false;
-      }
-    },
-    playVideoInNavPanel: function() {
-      if (this.playVideoInNavPanel) {
-        console.log("watch function");
-        this.$refs.youtube.player.unMute();
-      } else {
-        this.$refs.youtube.player.mute();
       }
     },
   },

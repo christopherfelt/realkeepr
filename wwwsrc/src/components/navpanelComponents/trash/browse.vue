@@ -85,7 +85,6 @@
 <script>
 import "animate.css";
 import RedditGenres from "@/components/navpanelComponents/redditGenres.vue";
-import BreadCrumb from "@/components/navpanelComponents/breadCrumb.vue";
 export default {
   name: "browse",
   mounted() {
@@ -111,7 +110,6 @@ export default {
     },
   },
   components: {
-    BreadCrumb,
     RedditGenres,
   },
 };

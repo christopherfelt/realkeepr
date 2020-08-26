@@ -11,13 +11,15 @@
     </button> -->
     <div
       v-show="playVideoInNavPanel"
-      class="animate__animated"
+      class="animate__animated "
       :class="{
         animate__fadeInDown: playVideoInNavPanel,
         animate__fadeInUp: !playVideoInNavPanel,
       }"
     >
-      <NavPanelVideos />
+      <div class="d-flex justify-content-center">
+        <NavPanelVideos />
+      </div>
     </div>
     <Playback />
 
@@ -40,115 +42,63 @@
         <li class="nav-item" role="presentation">
           <a
             class="nav-link"
-            id="distractions-tab"
+            id="idles-tab"
             data-toggle="tab"
-            href="#distractions"
+            href="#idles"
             role="tab"
-            aria-controls="distractions"
+            aria-controls="idles"
             aria-selected="false"
-            >Distractions</a
+            >Idles</a
           >
         </li>
         <li class="nav-item" role="presentation">
           <a
             class="nav-link"
-            id="distractions-tab"
+            id="dashboard-tab"
             data-toggle="tab"
-            href="#distractions"
+            href="#dashboard"
             role="tab"
-            aria-controls="distractions"
+            aria-controls="dashboard"
             aria-selected="false"
             >Dashboard</a
           >
         </li>
       </ul>
     </div>
-
-    <div
-      class="d-flex justify-content-center p-1 animate__animated animate__fadeInUp"
-    >
-      <ul class="nav nav-pills" id="pills-tab" role="tablist">
-        <li class="nav-item pill-style m-1">
-          <a
-            class="nav-link p-1"
-            id="pills-browse-tab"
-            data-toggle="pill"
-            href="#pills-browse"
-            role="tab"
-            aria-controls="pills-browse"
-            aria-selected="true"
-          >
-            <small> Browse </small>
-          </a>
-        </li>
-        <li class="nav-item pill-style m-1">
-          <a
-            class="nav-link p-1"
-            id="pills-search-tab"
-            data-toggle="pill"
-            href="#pills-search"
-            role="tab"
-            aria-controls="pills-search"
-            aria-selected="false"
-          >
-            <small>Search</small></a
-          >
-        </li>
-        <li class="nav-item pill-style m-1 ">
-          <a
-            class="nav-link p-1"
-            id="pills-dashboard-tab"
-            data-toggle="pill"
-            href="#pills-dashboard"
-            role="tab"
-            aria-controls="pills-dashboard"
-            aria-selected="false"
-          >
-            <small v-if="$auth.isAuthenticated">Dashboard</small>
-            <small v-else> Login </small>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="d-flex justify-content-start ml-5">
-      <div class="tab-content" id="pills-tabContent">
-        <div
-          class="tab-pane"
-          id="pills-browse"
-          role="tabpanel"
-          aria-labelledby="pills-browse-tab"
-        >
-          <Browse />
-        </div>
-        <div
-          class="tab-pane fade"
-          id="pills-search"
-          role="tabpanel"
-          aria-labelledby="pills-search-tab"
-        >
-          <Search />
-        </div>
-        <div
-          class="tab-pane fade"
-          id="pills-dashboard"
-          role="tabpanel"
-          aria-labelledby="pills-dashboard-tab"
-        >
-          <DashboardPanel />
-        </div>
+    <div class="tab-content" id="myTabContent">
+      <div
+        class="tab-pane fade show active"
+        id="music"
+        role="tabpanel"
+        aria-labelledby="music-tab"
+      >
+        <MainMusic />
+      </div>
+      <div
+        class="tab-pane fade"
+        id="idles"
+        role="tabpanel"
+        aria-labelledby="idles-tab"
+      >
+        <h6>Idle Stuff</h6>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="dashboard"
+        role="tabpanel"
+        aria-labelledby="dashboard-tab"
+      >
+        <DashboardPanel />
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-import Playback from "@/components/playback.vue";
-import NavpanelVaultList from "@/components/navpanelVaultList.vue";
-import Browse from "@/components/navpanelComponents/browse.vue";
-import Search from "@/components/navpanelComponents/search.vue";
-import DashboardPanel from "@/components/navpanelComponents/dashboardPanel.vue";
-import SubredditPostCard from "@/components/subredditPostCard.vue";
-import NavPanelVideos from "@/components/navpanelComponents/navPanelVideos.vue";
+import NavPanelVideos from "@/components/navpanelComponents/navpanelVideo/navPanelVideos.vue";
+import Playback from "@/components/navpanelComponents/playback/playback.vue";
+import MainMusic from "@/components/navpanelComponents/music/mainMusic.vue";
+import DashboardPanel from "@/components/navpanelComponents/dashboard/dashboardPanel.vue";
 import "animate.css";
 export default {
   name: "NavPanel",
@@ -186,33 +136,30 @@ export default {
     },
   },
   components: {
-    Playback,
-    NavpanelVaultList,
-    Browse,
-    Search,
-    DashboardPanel,
-    SubredditPostCard,
     NavPanelVideos,
+    Playback,
+    MainMusic,
+    DashboardPanel,
   },
 };
 </script>
 
 <style lang="scss">
-@import "../assets/_variables.scss";
+@import "../../assets/_variables.scss";
 
 @font-face {
   font-family: "ailerons";
-  src: url("../assets/fonts/ailerons/Ailerons-Regular.otf");
+  src: url("../../assets/fonts/ailerons/Ailerons-Regular.otf");
 }
 
 @font-face {
   font-family: "anurati";
-  src: url("../assets/fonts/anurati/Anurati-Regular.otf");
+  src: url("../../assets/fonts/anurati/Anurati-Regular.otf");
 }
 
 @font-face {
   font-family: "nordic";
-  src: url("../assets/fonts/nordic/nordic.ttf");
+  src: url("../../assets/fonts/nordic/nordic.ttf");
 }
 
 .bg-panel {
@@ -263,6 +210,10 @@ export default {
 }
 
 .main-tab {
-  font-size: 11px;
+  font-size: 12px;
+}
+
+.displayNone {
+  display: none;
 }
 </style>

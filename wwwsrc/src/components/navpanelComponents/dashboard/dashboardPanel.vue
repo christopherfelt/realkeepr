@@ -29,7 +29,6 @@
           </router-link>
         </div>
       </div>
-      <!-- <NavpanelVaultList /> -->
     </div>
     <button class="btn btn-success" @click="login" v-else>
       Login

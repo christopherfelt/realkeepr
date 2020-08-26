@@ -4,17 +4,17 @@
     <!-- <div v-for="vault in vaults" :key="vault.id" v-show="vault.show">
       {{ vault.name }}
     </div> -->
-    <NavpanelVaultListItem
+    <!-- <NavpanelVaultListItem
       v-for="(vault, index) in vaults"
       :key="vault.id"
       :vault="vault"
       :index="index"
-    />
+    /> -->
   </div>
 </template>
 
 <script>
-import NavpanelVaultListItem from "@/components/navpanelVaultListItem";
+// import NavpanelVaultListItem from "@/components/navpanelVaultListItem";
 import { onAuth } from "@bcwdev/auth0-vue";
 export default {
   name: "navpanelVaultList",
@@ -36,7 +36,7 @@ export default {
   },
   methods: {},
   components: {
-    NavpanelVaultListItem,
+    // NavpanelVaultListItem,
   },
   watch: {
     authToken: function() {

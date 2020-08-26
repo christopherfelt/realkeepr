@@ -40,8 +40,7 @@
 
 <script>
 import Navbar from "@/components/navbar";
-import Navpanel from "@/components/navpanel";
-import Playback from "@/components/playback";
+import Navpanel from "@/components/navpanelComponents/navpanel";
 import SubredditDetail from "@/views/SubredditDetail.vue";
 import { onAuth } from "@bcwdev/auth0-vue";
 
@@ -87,7 +86,6 @@ export default {
     EditKeepModal,
     DeleteConfirmationModal,
     SubredditDetail,
-    Playback,
   },
 };
 </script>

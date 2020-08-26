@@ -1,5 +1,5 @@
 <template>
-  <div class="playback d-flex justify-content-between p-3">
+  <div class="playback d-flex justify-content-between p-1 mb-1">
     <span
       class="playback-button py-2 px-3 "
       :class="{ pbActive: paused }"
@@ -84,8 +84,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/_variables.scss";
-
 .heading-4-color {
   color: black;
 }
