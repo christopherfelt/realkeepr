@@ -36,7 +36,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../../assets/_variables.scss";
+
 .indicator-box {
   height: 10px;
   width: 10px;
@@ -45,7 +47,7 @@ export default {
 }
 
 .total {
-  background-color: lightblue;
+  background-color: $light-blue;
 }
 
 .complete {

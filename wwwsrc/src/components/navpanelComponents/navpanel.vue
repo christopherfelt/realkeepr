@@ -1,9 +1,8 @@
 <template>
-  <nav id="sidebar" class="bg-panel">
+  <nav id="sidebar" class="">
     <div class="sidebar-header m-3 d-flex justify-content-center">
-      <h1 class="anurati heading-1-color cursor-pointer" @click="routeToRandom">
-        MUS<span class="heading-4-color mr-2">A</span
-        ><span class="mr-2">I</span>C
+      <h1 class="anurati musaic-logo cursor-pointer" @click="routeToRandom">
+        MUS<span class="musaic-logo-a mr-2">A</span><span class="mr-2">I</span>C
       </h1>
     </div>
     <!-- <button class="btn btn-primary" @click="toggleMobileNavPanel">
@@ -147,62 +146,12 @@ export default {
 <style lang="scss">
 @import "../../assets/_variables.scss";
 
-@font-face {
-  font-family: "ailerons";
-  src: url("../../assets/fonts/ailerons/Ailerons-Regular.otf");
+.musaic-logo {
+  color: $rich-black-FOGRA-29;
 }
 
-@font-face {
-  font-family: "anurati";
-  src: url("../../assets/fonts/anurati/Anurati-Regular.otf");
-}
-
-@font-face {
-  font-family: "nordic";
-  src: url("../../assets/fonts/nordic/nordic.ttf");
-}
-
-.bg-panel {
-  background-color: $body-bg;
-}
-
-.heading-1-color {
-  color: $heading-1;
-}
-
-.heading-2-color {
-  color: $heading-2;
-}
-
-.heading-3-color {
-  color: $heading-3;
-}
-
-.heading-4-color {
-  color: $heading-4;
-}
-
-.a-in-title {
-  color: $a-in-title;
-}
-
-.ailerons {
-  font-family: "ailerons", sans-serif;
-}
-
-.anurati {
-  font-family: "anurati", sans-serif;
-}
-
-.nordic {
-  font-family: "nordic", sans-serif;
-}
-
-.remove-underline {
-  text-decoration: none;
-}
-.remove-underline:hover {
-  text-decoration: none;
+.musaic-logo-a {
+  color: $shadow-blue;
 }
 
 .cursor-pointer {
@@ -213,7 +162,9 @@ export default {
   font-size: 12px;
 }
 
-.displayNone {
-  display: none;
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  background-color: $alice-blue;
+  border-bottom: 1px solid $alice-blue;
 }
 </style>

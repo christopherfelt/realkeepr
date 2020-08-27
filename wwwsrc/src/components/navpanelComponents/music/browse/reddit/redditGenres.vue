@@ -92,9 +92,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.redditGenres {
-}
+<style lang="scss">
+@import "../../../../../assets/_variables.scss";
 
 .backButton {
   color: #6f9b98;
@@ -108,16 +107,12 @@ export default {
   color: #1c3534;
 }
 
-.genreList {
-  border: 1px solid red;
-}
-
 .genreContainer {
   font-size: 13px;
 }
 
 .genresContainer {
-  color: #155f59;
+  color: $deep-jungle-green;
 }
 
 .position-zero {

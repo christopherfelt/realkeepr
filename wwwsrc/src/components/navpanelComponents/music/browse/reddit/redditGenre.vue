@@ -3,7 +3,7 @@
     <div class="rounded text-center backButton" @click="goBackToGenresMenu">
       <i class="fas fa-chevron-left fa-xs"></i>
     </div>
-    <div class="ml-4 mt-2 genresContainer">
+    <div class="ml-4 mt-2 subredditsContainer">
       <h6 class="">{{ genre }}</h6>
       <div class="" v-for="sub in subreddits" :key="sub">
         <router-link
@@ -54,7 +54,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../../../../../assets/_variables.scss";
+
 .redditGenre {
   width: 250px;
 }
@@ -65,34 +67,22 @@ export default {
   }
 }
 
-.backButton {
-  color: #6f9b98;
-  width: 18px;
-  height: 18px;
-  transition-duration: 500ms;
-  cursor: pointer;
-}
-
-.backButton:hover {
-  color: #1c3534;
-}
-
-.genresContainer {
-  color: #155f59;
+.subredditsContainer {
+  color: $deep-jungle-green;
   font-size: 13px;
   height: 60vh;
   overflow-y: auto;
 }
 
-.genresContainer::-webkit-scrollbar {
+.subredditsContainer::-webkit-scrollbar {
   width: 0.5em;
 }
 
-.genresContainer::-webkit-scrollbar-track {
+.subredditsContainer::-webkit-scrollbar-track {
   /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
 }
 
-.genresContainer::-webkit-scrollbar-thumb {
+.subredditsContainer::-webkit-scrollbar-thumb {
   /* background-color: darkgrey;
   outline: 1px solid slategrey; */
 }

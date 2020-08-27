@@ -5,13 +5,6 @@
         <navpanel @backButtonClick="toggleNavPanel" />
       </div>
       <div class="details">
-        <!-- <div class="sidebar-header m-3 d-flex justify-content-center">
-          <h1 class="anurati heading-1-color" @click="routeToHome">
-            MUS<span class="heading-4-color mr-2">A</span
-            ><span class="mr-2">I</span>C
-          </h1>
-        </div>
-        <Playback /> -->
         <button
           class="btn btn-primary m-1 d-sm-block d-md-none"
           @click="toggleNavPanel"
@@ -92,16 +85,34 @@ export default {
 
 <style lang="scss">
 @import "./assets/_variables.scss";
-@import "bootstrap";
-@import "./assets/_overrides.scss";
 
 @font-face {
   font-family: "anurati";
   src: url("assets/fonts/anurati/Anurati-Regular.otf");
 }
-
 .anurati {
   font-family: "anurati", sans-serif;
+}
+
+@font-face {
+  font-family: "ailerons";
+  src: url("assets/fonts/ailerons/Ailerons-Regular.otf");
+}
+
+.ailerons {
+  font-family: "ailerons", sans-serif;
+}
+
+body {
+  background-color: $alice-blue;
+}
+
+a {
+  color: $deep-jungle-green;
+}
+
+a:hover {
+  color: $rich-black-FOGRA-29;
 }
 
 .app {
@@ -116,7 +127,6 @@ export default {
   top: 0;
   left: 0;
   z-index: 999;
-  background-color: $body-bg;
 }
 
 .details {
@@ -141,18 +151,22 @@ export default {
   transition-delay: 1s;
 }
 
+// overrides
+
 .btn-primary {
   border: none;
+}
+
+// modals
+
+.dangerButton {
+  background-color: #b80c09;
 }
 
 .openNavPanel {
 }
 
 .disableFunctionality {
-}
-
-.dangerButton {
-  background-color: #b80c09;
 }
 
 @media screen and (max-width: 767.98px) {

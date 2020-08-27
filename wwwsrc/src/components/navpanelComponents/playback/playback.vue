@@ -1,27 +1,27 @@
 <template>
   <div class="playback d-flex justify-content-between p-1 mb-1">
     <span
-      class="playback-button py-2 px-3 "
+      class="playback-button rounded py-2 px-3 "
       :class="{ pbActive: paused }"
       @click="playBackClick('paused')"
       ><i class="fas fa-pause"></i
     ></span>
     <span
-      class="playback-button py-2 px-3"
+      class="playback-button rounded py-2 px-3"
       :class="{ pbActive: playing }"
       @click="playBackClick('playing')"
       ><i class="fas fa-play"></i
     ></span>
     <span
-      class="playback-button py-2 px-3"
+      class="playback-button rounded py-2 px-3"
       :class="{ pbActive: stopped }"
       @click="playBackClick('stopped')"
-      ><i class="fas fa-stop"></i
+      ><i class="fas fa-stop playback-icon"></i
     ></span>
-    <span class="playback-button py-2 px-3" @click="previousClick"
+    <span class="playback-button rounded py-2 px-3" @click="previousClick"
       ><i class="fas fa-backward"></i
     ></span>
-    <span class="playback-button py-2 px-3" @click="nextClick"
+    <span class="playback-button rounded py-2 px-3" @click="nextClick"
       ><i class="fas fa-forward"></i
     ></span>
   </div>
@@ -84,12 +84,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.heading-4-color {
-  color: black;
-}
+@import "../../../assets/_variables.scss";
 
 .playback-button {
   transition-duration: 250ms;
+  color: $rich-black-FOGRA-29;
 }
 
 .playback-button:hover {
@@ -97,7 +96,6 @@ export default {
 }
 
 .pbActive {
-  // background-color: #3e5c76;
-  color: #748cab;
+  color: $shadow-blue;
 }
 </style>

@@ -72,4 +72,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "../../../assets/_variables.scss";
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: $deep-jungle-green;
+}
+</style>

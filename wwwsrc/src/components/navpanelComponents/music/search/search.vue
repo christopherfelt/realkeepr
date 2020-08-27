@@ -61,13 +61,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../../../../assets/_variables.scss";
+
 .searchInput {
-  /* opacity: 90%; */
   background-color: #f4f5f6;
   border: none;
   border-bottom: 0.5px solid #155f5956;
-  color: #155f59;
+  color: $deep-jungle-green;
 }
 
 .searchInput[type="text"]:focus {
@@ -75,14 +76,14 @@ export default {
   outline: none;
   border: none;
   border-bottom: 1px solid #155f5956;
-  color: #155f59;
+  color: $deep-jungle-green;
 }
 
 .genresContainer {
-  color: #155f59;
   font-size: 13px;
   height: 60vh;
   overflow-y: auto;
+  color: $deep-jungle-green;
 }
 
 .genresContainer::-webkit-scrollbar {

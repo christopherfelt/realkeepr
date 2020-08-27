@@ -115,7 +115,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .position-zero {
   top: 0;
   left: 0;
