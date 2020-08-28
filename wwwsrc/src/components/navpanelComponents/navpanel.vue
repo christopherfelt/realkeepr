@@ -38,7 +38,7 @@
             >Music</a
           >
         </li>
-        <li class="nav-item" role="presentation">
+        <!-- <li class="nav-item" role="presentation">
           <a
             class="nav-link"
             id="idles-tab"
@@ -49,7 +49,7 @@
             aria-selected="false"
             >Idles</a
           >
-        </li>
+        </li> -->
         <li class="nav-item" role="presentation">
           <a
             class="nav-link"

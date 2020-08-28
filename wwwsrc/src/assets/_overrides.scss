@@ -1,6 +1,84 @@
+.btn:focus,
+.btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .btn-primary {
-  color: $light;
-  background-color: $primary;
-  border-color: darken($color: $primary, $amount: 10);
-  border-width: medium;
+  background-color: $deep-jungle-green;
+  transition-duration: 0.25s;
+  border: none;
+  outline: none !important;
+}
+
+.btn-primary:hover {
+  background-color: darken($deep-jungle-green, 5%);
+  border: none;
+  outline: none !important;
+}
+
+.btn-primary:active {
+  background-color: darken($deep-jungle-green, 10%) !important;
+  border: none;
+  outline: none !important;
+}
+
+.btn-primary:focus {
+  background-color: darken($deep-jungle-green, 10%) !important;
+  border: none;
+  box-shadow: none;
+  outline: none !important;
+}
+
+.btn-primary:visited {
+  background-color: darken($deep-jungle-green, 10%) !important;
+  border: none;
+  box-shadow: none;
+  outline: none !important;
+}
+
+.btn-outline-primary {
+  border-color: $deep-jungle-green;
+  color: $deep-jungle-green;
+  transition-duration: 0.25s;
+}
+
+.btn-outline-primary:hover {
+  background-color: darken($deep-jungle-green, 5%);
+  border-color: darken($deep-jungle-green, 5%);
+}
+
+.btn-outline-primary:active {
+  background-color: darken($deep-jungle-green, 10%) !important;
+  border-color: darken($deep-jungle-green, 10%) !important;
+  color: white !important;
+}
+
+.btn-outline-primary:focus {
+  background-color: darken($deep-jungle-green, 10%) !important;
+  border-color: darken($deep-jungle-green, 10%) !important;
+  color: white !important;
+}
+
+.btn-outline-primary:visited {
+  background-color: darken($deep-jungle-green, 10%) !important;
+  color: white !important;
+  border: none;
+}
+
+.btn-danger {
+  background-color: $international-orange-engineering;
+}
+
+.btn-danger:hover {
+  background-color: darken($international-orange-engineering, 5%);
+}
+
+.btn-danger:active {
+  background-color: darken($international-orange-engineering, 10%) !important;
+}
+
+.btn-danger:focus {
+  background-color: darken($international-orange-engineering, 10%) !important;
+  box-shadow: none;
 }

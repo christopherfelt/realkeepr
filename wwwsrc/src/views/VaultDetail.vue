@@ -22,16 +22,22 @@
       <div class="row d-flex justify-content-center">
         <div class="col-10 ">
           <div class="keep-container">
-            <button
+            <!-- <button
               class="btn btn-success m-2 add-keep-button"
               @click="openAddKeepModal"
             >
               Add Keep
-            </button>
-            <KeepCard
+            </button> -->
+            <!-- <KeepCard
               v-for="(keep, index) in activeKeeps"
               :key="keep.id"
               :keep="keep"
+              :index="index"
+            /> -->
+            <SubredditPostCard
+              v-for="(keep, index) in activeKeeps"
+              :key="keep.img"
+              :subredditId="keep.img"
               :index="index"
             />
           </div>
@@ -43,6 +49,7 @@
 
 <script>
 import KeepCard from "@/components/keepCard.vue";
+import SubredditPostCard from "@/components/subredditPostCard.vue";
 export default {
   name: "vaultDetail",
   mounted() {
@@ -90,6 +97,7 @@ export default {
   },
   components: {
     KeepCard,
+    SubredditPostCard,
   },
 };
 </script>

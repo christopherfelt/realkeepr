@@ -31,16 +31,6 @@
             >Reddit Music</a
           >
         </li>
-        <li class="nav-item">
-          <a
-            class="nav-link py-0"
-            data-toggle="tab"
-            role="tab"
-            href="#mtv-news"
-            @click="changeVisibilityStatus()"
-            >MTV News</a
-          >
-        </li>
       </ul>
     </div>
     <div
@@ -68,15 +58,6 @@
         aria-labelledby="reddit-tab"
       >
         <RedditGenres @backButtonClick="changeVisibilityStatusBack" />
-      </div>
-      <div
-        class="tab-pane fade"
-        :class="{}"
-        id="mtv-news"
-        role="tabpanel"
-        aria-labelledby="mtv-news-tab"
-      >
-        Mtv News
       </div>
     </div>
   </div>

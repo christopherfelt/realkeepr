@@ -85,6 +85,7 @@ export default {
 
 <style lang="scss">
 @import "./assets/_variables.scss";
+@import "./assets/_overrides.scss";
 
 @font-face {
   font-family: "anurati";
@@ -127,6 +128,7 @@ a:hover {
   top: 0;
   left: 0;
   z-index: 999;
+  background-color: $alice-blue;
 }
 
 .details {
@@ -151,17 +153,7 @@ a:hover {
   transition-delay: 1s;
 }
 
-// overrides
-
-.btn-primary {
-  border: none;
-}
-
 // modals
-
-.dangerButton {
-  background-color: #b80c09;
-}
 
 .openNavPanel {
 }
@@ -177,6 +169,7 @@ a:hover {
   .navpanel {
     left: -315px;
     width: 75%;
+    height: 100vh;
     transition-duration: 0.5s;
   }
   .openNavPanel {
