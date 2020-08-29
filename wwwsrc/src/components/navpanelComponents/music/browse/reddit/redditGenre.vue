@@ -49,6 +49,9 @@ export default {
     playVideoInNavPanel() {
       console.log("from reddit genre");
     },
+    // toggleNavPanel(){
+    //   this.
+    // }
   },
   components: {},
 };

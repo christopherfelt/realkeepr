@@ -23,6 +23,7 @@ export default new Vuex.Store({
   state: {
     publicKeeps: [],
     playVideoInNavPanel: false,
+    mobileNavPanelIsOpen: true,
   },
   mutations: {
     setPlayVideoInNavPanelStatus(state, playVideoInNavPanelValue) {
@@ -39,6 +40,9 @@ export default new Vuex.Store({
     changePlayVideoInNavPanelStatus({ commit }, playVideoInNavPanelValue) {
       console.log("changePlayVideo status change");
       commit("setPlayVideoInNavPanelStatus", playVideoInNavPanelValue);
+    },
+    toggleMobileNavPanel({ commit }, mobileNavPanelStatus) {
+      commit("changeMobileNavPanelStatus", mobileNavPanelStatus);
     },
   },
   modules: {

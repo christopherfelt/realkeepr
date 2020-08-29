@@ -30,9 +30,11 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-success" @click="login" v-else>
-      Login
-    </button>
+    <div class="pl-5 py-3" v-else>
+      <button class="btn btn-primary btn-sm" @click="login">
+        Login
+      </button>
+    </div>
   </div>
 </template>
 

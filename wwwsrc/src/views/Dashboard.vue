@@ -2,13 +2,6 @@
   <div
     class="dashboard-container container-fluid  animate__animated animate__fadeIn"
   >
-    <div class="row">
-      <!-- <div class="col">
-        <button class="btn btn-danger dangerButton float-right" @click="logout">
-          logout
-        </button>
-      </div> -->
-    </div>
     <div class="row mb-5">
       <div class="col text-center">
         <div>
@@ -18,7 +11,7 @@
         </div>
         <div class="d-flex justify-content-center">
           <div class="logout">
-            <button class="btn btn-outline-primary btn-sm" @click="logout">
+            <button class="btn btn-primary btn-sm" @click="logout">
               logout?
             </button>
           </div>

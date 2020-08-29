@@ -82,13 +82,18 @@
         <h6>Idle Stuff</h6>
       </div>
       <div
-        class="tab-pane fade"
+        class="tab-pane pl-5 fade"
         id="dashboard"
         role="tabpanel"
         aria-labelledby="dashboard-tab"
       >
         <DashboardPanel />
       </div>
+    </div>
+    <div class="about-section my-2 text-center border-top">
+      <router-link :to="{ name: 'about' }">
+        About
+      </router-link>
     </div>
   </nav>
 </template>
@@ -166,5 +171,16 @@ export default {
 .nav-tabs .nav-link.active {
   background-color: $alice-blue;
   border-bottom: 1px solid $alice-blue;
+}
+
+.about-section {
+  position: fixed;
+  bottom: 0;
+  width: 250px;
+  font-size: 12px;
+}
+
+.test-border {
+  outline: 4px solid red;
 }
 </style>

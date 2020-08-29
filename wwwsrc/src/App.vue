@@ -64,10 +64,14 @@ export default {
       navPanelIsOpen: true,
     };
   },
+  computed: {
+    navPanelIsOpen() {
+      return this.$store.State.mobileNavPanelIsOpen;
+    },
+  },
   methods: {
     toggleNavPanel() {
-      this.navPanelIsOpen = !this.navPanelIsOpen;
-      console.log("toggle navpanel");
+      this.$store.dispatch("toggleMobileNavPanel", true);
     },
   },
   components: {

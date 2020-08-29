@@ -12,6 +12,8 @@ import KeepDetail from "./views/KeepDetail.vue";
 import KeepDetailPublic from "./views/KeepDetailPublic.vue";
 // @ts-ignore
 import SubredditDetail from "./views/SubredditDetail.vue";
+// @ts-ignore
+import About from "./views/About.vue";
 
 import { authGuard } from "@bcwdev/auth0-vue";
 
@@ -56,6 +58,11 @@ export default new Router({
       path: "/subreddit/:subreddit",
       name: "subredditDetail",
       component: SubredditDetail,
+    },
+    {
+      path: "/about",
+      name: "about",
+      component: About,
     },
   ],
 });
