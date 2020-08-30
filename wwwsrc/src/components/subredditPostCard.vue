@@ -43,12 +43,16 @@
       </div>
     </div>
 
-    <div
-      class="rounded-bottom text-center keep"
-      @click="displayVaults"
-      v-if="$auth.isAuthenticated"
-    >
-      <span><i class="fas fa-plus"></i></span>
+    <div class="rounded-bottom text-center keep" v-if="$auth.isAuthenticated">
+      <span class="videoButtons" v-if="!inVault" @click="displayVaults"
+        ><i class="fas fa-plus"></i
+      ></span>
+      <span
+        class="pl-2 videoButtons delete"
+        v-if="inVault"
+        @click="openDeleteKeepConfirmationModal"
+        ><i class="fas fa-minus"></i
+      ></span>
     </div>
     <div class="rounded-bottom text-center keep" v-else>
       <small class="m-0 p-0">login to create playlist</small>
@@ -68,6 +72,7 @@ export default {
       ready: false,
       played: false,
       vaultsVisible: false,
+      error: false,
       playerVars: {
         autoplay: 0,
         playsinline: 1,
@@ -75,7 +80,7 @@ export default {
       },
     };
   },
-  props: ["subredditId", "index", "subredditName"],
+  props: ["subredditId", "index", "subredditName", "inVault", "keepId"],
   computed: {
     currentlyPlayingVideo() {
       return this.$store.state.PlaybackStore.currentlyPlayingVideo;
@@ -95,6 +100,7 @@ export default {
   },
   methods: {
     nextSong() {
+      console.log("next song");
       let nextSong = this.currentlyPlayingVideo + 1;
       this.$store.dispatch("changeSong", nextSong);
     },
@@ -107,11 +113,13 @@ export default {
         this.ready = true;
       }
     },
-    testTimeOut() {
-      console.log("timeout works");
-    },
     errorHandling() {
-      console.log("error id: ", this.subredditId);
+      if (!this.error) {
+        let nextSong = this.currentlyPlayingVideo + 1;
+        this.$store.dispatch("changeSong", nextSong);
+        this.error = true;
+      }
+      console.error("youtube error id: ", this.subredditId);
     },
     displayVaults() {
       console.log("display vaults");
@@ -128,6 +136,17 @@ export default {
       console.log(keepData);
       this.displayVaults();
       this.$store.dispatch("createNewKeep", keepData);
+    },
+    openDeleteKeepConfirmationModal() {
+      $("#deleteConfirmationModal").data("model", "keep");
+      $("#deleteConfirmationModal").data("keepid", this.keepId);
+      $("#deleteConfirmationModal")
+        .find("#span-title")
+        .text("Keep");
+      $("#deleteConfirmationModal")
+        .find("#span-body")
+        .text("Song ");
+      $("#deleteConfirmationModal").modal("toggle");
     },
   },
   components: {},
@@ -167,7 +186,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/_variables.scss";
 .keep {
   opacity: 0;
   transition-duration: 0.5s;
@@ -232,7 +252,11 @@ export default {
   box-shadow: 0 0 4px 1px;
 }
 
-a:hover {
-  text-decoration: none;
+.videoButtons {
+  cursor: pointer;
+}
+
+.delete {
+  color: $international-orange-engineering;
 }
 </style>

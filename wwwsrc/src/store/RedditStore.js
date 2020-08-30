@@ -47,8 +47,6 @@ export const RedditStore = {
       state.readyIndicators = 0;
     },
     updateReadyStatus(state) {
-      // Vue.set(state.readyIndicators, index, true);
-      console.log("Number Ready: ", state.readyIndicators);
       state.readyIndicators = state.readyIndicators + 1;
     },
   },
@@ -63,7 +61,6 @@ export const RedditStore = {
       for (let i = 0; i < keys.length; i++) {
         let key = keys[i];
         let subredditsList = gl[key];
-        // console.log("Key: ", key, " List: ", subredditsList);
         commit("setSubreddits", { id: key, data: subredditsList });
       }
     },

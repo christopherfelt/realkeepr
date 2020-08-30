@@ -29,7 +29,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary bg-success border-0"
+              class="btn btn-primary border-0"
               data-dismiss="modal"
             >
               Close

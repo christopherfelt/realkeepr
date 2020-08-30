@@ -3,20 +3,58 @@
     <div
       class="vault-detail-container container-fluid m-3 p-3 animate__animated animate__fadeIn"
     >
-      <div class="row">
-        <div class="col">
-          <button
-            class="btn btn-danger dangerButton float-right"
-            @click="openDeleteVaultConfirmationModal"
-          >
-            Delete Vault
-          </button>
-        </div>
-      </div>
+      <div class="row"></div>
       <div class="row text-center">
         <div class="col">
-          <h1 class="ailerons">{{ activeVault.name }}</h1>
-          <p class="">{{ activeVault.description }}</p>
+          <div class="d-flex justify-content-center">
+            <div class="align-self-center backButton" @click="goToDashboard">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+            <div v-if="!editOptionChosen">
+              <h1 class="ailerons">{{ activeVault.name }}</h1>
+            </div>
+            <div v-if="editOptionChosen" class="mb-2">
+              <input type="text" v-model="activeVault.name" />
+            </div>
+            <div class="align-self-center" @click="changeOptionVisibility">
+              <span
+                class="anurati options"
+                :class="{ optionsClicked: optionsVisible }"
+                >I</span
+              >
+            </div>
+          </div>
+          <div
+            class="d-flex justify-content-center mb-1 animate__animated animate__fadeInDown"
+            v-if="optionsVisible"
+          >
+            <div
+              class="mx-1 option edit"
+              :class="{ editChosen: editOptionChosen }"
+              @click="changeEditOptionStatus"
+            >
+              <small>Edit</small>
+            </div>
+            <div
+              class="mx-1 option delete"
+              @click="openDeleteVaultConfirmationModal"
+            >
+              <small>Delete</small>
+            </div>
+            <div
+              v-if="editOptionChosen"
+              class="mx-1  animate__animated animate__fadeInRight "
+              @click="updateVault"
+            >
+              <small class="option save">Save</small>
+            </div>
+          </div>
+          <div v-if="!editOptionChosen">
+            <p class="">{{ activeVault.description }}</p>
+          </div>
+          <div v-if="editOptionChosen" class="mt-2">
+            <input type="text" v-model="activeVault.description" />
+          </div>
         </div>
       </div>
       <div class="row d-flex justify-content-center">
@@ -39,6 +77,8 @@
               :key="keep.img"
               :subredditId="keep.img"
               :index="index"
+              :inVault="true"
+              :keepId="keep.id"
             />
           </div>
         </div>
@@ -57,7 +97,10 @@ export default {
     this.$store.dispatch("getKeepsByVaultId", this.$route.params.vaultId);
   },
   data() {
-    return {};
+    return {
+      optionsVisible: false,
+      editOptionChosen: false,
+    };
   },
   computed: {
     activeVault() {
@@ -94,6 +137,25 @@ export default {
         .text("vault " + this.activeVault.name);
       $("#deleteConfirmationModal").modal("toggle");
     },
+    changeOptionVisibility() {
+      if (this.optionsVisible) {
+        this.optionsVisible = false;
+        this.editOptionChosen = false;
+      } else {
+        this.optionsVisible = true;
+      }
+    },
+    changeEditOptionStatus() {
+      this.editOptionChosen = !this.editOptionChosen;
+    },
+    updateVault() {
+      this.$store.dispatch("updateVault", this.activeVault);
+      this.editOptionChosen = false;
+      this.optionsVisible = false;
+    },
+    goToDashboard() {
+      this.$router.push({ name: "dashboard" });
+    },
   },
   components: {
     KeepCard,
@@ -102,7 +164,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/_variables.scss";
 /* .vault-detail-container {
   position: absolute;
   top: 0;
@@ -119,5 +182,59 @@ export default {
 .add-keep-button {
   width: 300px;
   height: 200px;
+}
+
+.options {
+  border: 1px solid black;
+  border-radius: 50%;
+  padding: 0 6px;
+  font-size: 12px;
+  opacity: 0.3;
+  transition-duration: 0.5s;
+  cursor: pointer;
+}
+
+.options:hover {
+  opacity: 0.9;
+}
+
+.optionsClicked {
+  opacity: 1;
+}
+
+.option {
+  cursor: pointer;
+  opacity: 0.5;
+  transition-duration: 0.5s;
+}
+
+.option:hover {
+  opacity: 0.9;
+}
+
+.edit {
+  color: $deep-jungle-green;
+}
+
+.editChosen {
+  text-decoration: underline;
+}
+
+.delete {
+  color: $international-orange-engineering;
+}
+
+.save {
+  color: $shadow-blue;
+}
+
+.backButton {
+  opacity: 0.3;
+  transition-duration: 0.5s;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  opacity: 0.9;
 }
 </style>

@@ -58,6 +58,14 @@ export const VaultStore = {
         console.error(error);
       }
     },
+    async updateVault({ dispatch }, vaultData) {
+      try {
+        let res = await api.put("vaults/" + vaultData.id, vaultData);
+        dispatch("setActiveVaultDetail", vaultData.id);
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async deleteVault({ commit, dispatch }, vaultId) {
       try {
         let res = await api.delete("vaults/" + vaultId);
