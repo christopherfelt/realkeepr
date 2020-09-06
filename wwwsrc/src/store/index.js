@@ -29,6 +29,9 @@ export default new Vuex.Store({
     setPlayVideoInNavPanelStatus(state, playVideoInNavPanelValue) {
       state.playVideoInNavPanel = playVideoInNavPanelValue;
     },
+    changeMobileNavPanelStatus(state, mobileNavPanelStatus) {
+      state.mobileNavPanelIsOpen = mobileNavPanelStatus;
+    },
   },
   actions: {
     setBearer({}, bearer) {

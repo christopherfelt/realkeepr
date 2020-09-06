@@ -1,13 +1,19 @@
 <template>
   <nav id="sidebar" class="">
-    <div class="sidebar-header m-3 d-flex justify-content-center">
-      <h1 class="anurati musaic-logo cursor-pointer" @click="routeToRandom">
-        MUS<span class="musaic-logo-a mr-2">A</span><span class="mr-2">I</span>C
-      </h1>
+    <div class="sidebar-header m-sm-0 m-md-3 d-flex justify-content-center">
+      <div>
+        <h1 class="anurati musaic-logo cursor-pointer" @click="routeToRandom">
+          MUS<span class="musaic-logo-a mr-2">A</span
+          ><span class="mr-2">I</span>C
+        </h1>
+      </div>
+      <div
+        class="text-right ml-4 mt-2 p-1 d-sm-block d-md-none"
+        @click="toggleMobileNavPanel"
+      >
+        <i class="fas fa-chevron-left fa-lg"></i>
+      </div>
     </div>
-    <!-- <button class="btn btn-primary" @click="toggleMobileNavPanel">
-      close
-    </button> -->
     <div
       v-show="playVideoInNavPanel"
       class="animate__animated "

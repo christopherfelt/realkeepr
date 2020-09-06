@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- <Navbar /> -->
     <div>
       <div class="navpanel" :class="{ openNavPanel: navPanelIsOpen }">
         <navpanel @backButtonClick="toggleNavPanel" />
@@ -60,18 +61,16 @@ export default {
     this.$store.dispatch("getSubredditVideos", this.$route.params.subreddit);
   },
   data() {
-    return {
-      navPanelIsOpen: true,
-    };
+    return {};
   },
   computed: {
     navPanelIsOpen() {
-      return this.$store.State.mobileNavPanelIsOpen;
+      return this.$store.state.mobileNavPanelIsOpen;
     },
   },
   methods: {
     toggleNavPanel() {
-      this.$store.dispatch("toggleMobileNavPanel", true);
+      this.$store.dispatch("toggleMobileNavPanel", !this.navPanelIsOpen);
     },
   },
   components: {
